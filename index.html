@@ -1,388 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>G2G Marketplace - Escrow Terminal</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G2G Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // FORCED LOGIN GUARD: If user hasn't logged in, redirect them to sign-up interface
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            window.location.href = "auth.html";
+        }
+    </script>
 </head>
 <body>
-  <div class="app-container">
-    <!-- Navbar Header -->
-    <header class="main-header">
-      <div class="header-content">
-        <div class="brand" onclick="switchTab('home')">
-          <div class="brand-icon">
-            <i data-lucide="laptop"></i>
-          </div>
-          <span class="brand-text">G2G MARKETPLACE</span>
-        </div>
 
-        <nav class="desktop-nav">
-          <button class="nav-pill active animate-tab" onclick="switchTab('home')">Home</button>
-          <button class="nav-pill" onclick="switchTab('about')">About</button>
-          <button class="nav-pill" onclick="switchTab('features')">Features</button>
-          <button class="nav-pill" onclick="switchTab('chat')">Global Chat</button>
-          <button class="nav-pill" onclick="switchTab('team')">Verified Team</button>
-          <button class="nav-pill" onclick="switchTab('reviews')">Reviews</button>
-          <button class="nav-pill hidden" id="profile-tab" onclick="switchTab('profile')">Profile</button>
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-shield-halved"></i> G2G MARKETPLACE
+        </div>
+        <nav>
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#team">Verified Team</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
         </nav>
-
-        <div class="auth-area">
-          <div id="logged-out-panel">
-            <a href="auth.html" class="btn btn-primary btn-sm">
-              <i data-lucide="lock" class="icon-sm"></i>
-              <span>DECRYPT LOCKBOX</span>
-            </a>
-          </div>
-          <div id="logged-in-panel" class="hidden">
-            <span id="user-badge" class="user-badge" onclick="switchTab('profile')">
-              <i data-lucide="user" class="icon-xs"></i>
-              <span id="badge-username">@username</span>
-            </span>
-            <button class="btn btn-secondary btn-sm" onclick="logoutUser()">
-              <i data-lucide="log-out" class="icon-sm"></i>
-              <span class="btn-text">LOGOUT</span>
-            </button>
-          </div>
+        <div class="nav-auth-buttons">
+            <button onclick="logoutUser()" class="btn btn-outline" style="cursor:pointer;"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</button>
         </div>
-      </div>
-
-      <!-- Mobile Navigation sub-menu -->
-      <div class="mobile-subnav">
-        <button class="mobile-tab active" onclick="switchTab('home')">Home</button>
-        <button class="mobile-tab" onclick="switchTab('about')">About</button>
-        <button class="mobile-tab" onclick="switchTab('features')">Features</button>
-        <button class="mobile-tab" onclick="switchTab('chat')">Chat</button>
-        <button class="mobile-tab" onclick="switchTab('team')">Team</button>
-        <button class="mobile-tab" onclick="switchTab('reviews')">Reviews</button>
-        <button class="mobile-tab hidden" id="mobile-profile-tab" onclick="switchTab('profile')">Profile</button>
-      </div>
     </header>
 
-    <!-- Main Workspace Segment -->
-    <main class="main-content">
-      
-      <!-- TAB 1: HOME -->
-      <section id="view-home" class="view-panel active animate-fade-in">
-        <div class="hero-grid">
-          <div class="hero-text">
-            <span class="badge">
-              <i data-lucide="sparkles" class="icon-sparkles"></i> Verified Escrow Node Active
-            </span>
-            <h1>G2G <br><span class="gradient-text">MARKETPLACE</span></h1>
-            <p class="tagline">Safe Trading. Trusted Middleman. Fast Support.</p>
-            <p class="description">We provide a secure and professional environment for all your trading needs. Our automated resolution platforms, ledger grids, and veteran escrow operators guarantee transaction security.</p>
-            <div class="cta-row">
-              <a href="https://discord.gg" target="_blank" class="btn btn-primary">
-                <i data-lucide="message-square"></i> Join Our Discord
-              </a>
-              <button class="btn btn-secondary" onclick="switchTab('about')">Learn More</button>
-            </div>
-          </div>
-          <div class="hero-graphic">
-            <div class="graphic-glow"></div>
-            <div class="shield-card">
-              <div class="shield-wrapper">
-                <i data-lucide="shield" class="giant-shield"></i>
-              </div>
-              <div class="marker-top">SECURE_DOCKET // 01</div>
-              <div class="marker-bottom">STATE: ARMED</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon"><i data-lucide="users"></i></div>
-            <div>
-              <h3>5K+</h3>
-              <p>Trusted Members</p>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon"><i data-lucide="check-circle"></i></div>
-            <div>
-              <h3>2K+</h3>
-              <p>Successful Deals</p>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon"><i data-lucide="headphones"></i></div>
-            <div>
-              <h3>24/7</h3>
-              <p>Active Support</p>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon"><i data-lucide="shield"></i></div>
-            <div>
-              <h3>100%</h3>
-              <p>Safe &amp; Secure</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 2: ABOUT -->
-      <section id="view-about" class="view-panel animate-fade-in hidden">
-        <div class="glass-container">
-          <div class="glass-header">
-            <h2>About G2G Network Integrity</h2>
-            <p class="subtitle">Decentralized Trust &amp; Escrow Infrastructure</p>
-          </div>
-          <div class="glass-body text-layout">
-            <p>Our platform has been running since 2024 to provide state-of-the-art middleman support. We ensure that you can trade virtual keys, currency, or high-tier game items without fear of chargebacks, scams, or fraudulent claims.</p>
-            <h3>Our Security Mandate</h3>
-            <ul>
-              <li><strong>Zero Risk:</strong> Funds and products are fully sequestered until confirmation is broadcast by both buyer and seller.</li>
-              <li><strong>Live Verification Desk:</strong> Handled by accredited, verified staff operators who log trade statuses on public ledger networks.</li>
-              <li><strong>Transparent Governance:</strong> Any review, message, or dispute is processed fairly.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 3: FEATURES -->
-      <section id="view-features" class="view-panel animate-fade-in hidden">
-        <div class="glass-container">
-          <div class="glass-header">
-            <h2>Our Operational Features</h2>
-            <p class="subtitle">Designed for professional traders</p>
-          </div>
-          <div class="glass-body">
-            <div class="features-grid">
-              <div class="feature-box">
-                <i data-lucide="shield-check"></i>
-                <h4>Secured Escrow Vault</h4>
-                <p>Advanced digital vault security with physical and multi-signature authorization keys for massive trade items.</p>
-              </div>
-              <div class="feature-box">
-                <i data-lucide="users"></i>
-                <h4>Veteran Operators</h4>
-                <p>Access background-checked support specialists authorized to moderate and clear dispute events immediately.</p>
-              </div>
-              <div class="feature-box">
-                <i data-lucide="activity"></i>
-                <h4>Real-Time Sync Terminal</h4>
-                <p>Integrated state machines keep tabs on open transaction states, ledger queues, and escrow handovers instantly.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 4: CHAT -->
-      <section id="view-chat" class="view-panel animate-fade-in hidden">
-        <div class="glass-container chat-layout-container">
-          <div class="chat-header">
-            <div class="chat-title-wrapper">
-              <span class="pulse-indicator"></span>
-              <div>
-                <h2>Global Transaction Terminal</h2>
-                <p>Active encrypted chat thread for general discussions</p>
-              </div>
-            </div>
-            <div class="chat-control-right">
-              <button class="btn btn-danger btn-xs hidden" id="chat-purge-btn" onclick="purgeChat()">
-                <i data-lucide="trash-2"></i> PURGE NETWORK
-              </button>
-            </div>
-          </div>
-
-          <div class="chat-messages-container" id="chat-messages-box">
-            <!-- Dynamically populated -->
-          </div>
-
-          <div class="chat-input-bar">
-            <!-- Logged out prompt -->
-            <div id="chat-auth-prompt" class="chat-auth-prompt-panel">
-              <p>🔐 Cryptographic identity authentication is suspended. Decrypt your credentials to unlock terminal features.</p>
-              <a href="auth.html" class="btn btn-secondary btn-xs">AUTHENTICATE</a>
-            </div>
-            <!-- Logged in form -->
-            <form id="chat-send-form" class="chat-form hidden" onsubmit="broadcastMessage(event)">
-              <input type="text" id="chat-text-input" placeholder="Broadcast a secure statement to G2G community..." required>
-              <button type="submit" class="btn btn-primary">
-                <i data-lucide="send"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 5: VERIFIED TEAM -->
-      <section id="view-team" class="view-panel animate-fade-in hidden">
-        <div class="glass-container">
-          <div class="glass-header">
-            <h2>G2G High-Tier Operators</h2>
-            <p class="subtitle">Fully verified trade administrators with security clearance</p>
-          </div>
-          <div class="glass-body">
-            <div class="team-grid">
-              <div class="team-card ring-purple">
-                <div class="team-avatar purple-bg">
-                  <i data-lucide="crown"></i>
-                </div>
-                <div class="team-info">
-                  <h4>@wrage4x1 <span class="badge-role purple-badge">Owner</span></h4>
-                  <p class="team-desc">Primary escrow administrator and compliance strategist. Authorized to sign high-tier transaction clearances.</p>
-                  <div class="team-meta">
-                    <span>1,420 Deals Completed</span>
-                    <span class="status-online">Online</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="team-card ring-amber">
-                <div class="team-avatar amber-bg">
-                  <i data-lucide="star"></i>
-                </div>
-                <div class="team-info">
-                  <h4>@prashant6700 <span class="badge-role amber-badge">Admin</span></h4>
-                  <p class="team-desc">Head of operational disputes and validation logic systems and standard ticketing queues.</p>
-                  <div class="team-meta">
-                    <span>852 Deals Completed</span>
-                    <span class="status-online">Online</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 6: REVIEWS -->
-      <section id="view-reviews" class="view-panel animate-fade-in hidden">
-        <div class="glass-container">
-          <div class="glass-header text-between">
-            <div>
-              <h2>Ledger &amp; Live Feedback Loop</h2>
-              <p class="subtitle">Transparent public trade verification</p>
-            </div>
-            <div class="page-marker">Page 04 // Open Reviews System</div>
-          </div>
-
-          <div class="glass-body space-y-default">
+    <main class="container">
+        
+        <div class="layout-grid">
             
-            <!-- Submit Review block -->
-            <div class="input-glass-panel">
-              <h3>Submit Your Public Record Review</h3>
-              
-              <!-- Warn if logged out -->
-              <div id="review-logout-warn" class="warn-banner">
-                <p>⚠️ Please <a href="auth.html" class="link">login or register</a> with your G2G cryptographic profile to write a public review.</p>
-              </div>
+            <div class="main-content">
+                
+                <section id="home" class="hero">
+                    <div class="hero-text">
+                        <h1>G2G <br><span class="highlight">MARKETPLACE</span></h1>
+                        <p class="subtitle">Safe Trading. Trusted Middleman. Fast Support.</p>
+                        <p class="description">We provide a secure and professional environment for all your trading needs. Your safety is our priority.</p>
+                        <div class="hero-buttons">
+                            <a href="https://discord.gg/xjeHqgyZH" target="_blank" class="btn btn-discord"><i class="fa-brands fa-discord"></i> JOIN OUR DISCORD</a>
+                            <a href="#about" class="btn btn-outline">LEARN MORE</a>
+                        </div>
+                    </div>
+                    <div class="hero-graphic">
+                        <div class="shield-logo">
+                            <i class="fa-solid fa-handshake"></i>
+                        </div>
+                    </div>
+                </section>
 
-              <form id="review-form" class="review-form hidden" onsubmit="postReview(event)">
-                <div class="form-group">
-                  <label>Star Rating</label>
-                  <select id="review-rating-select">
-                    <option value="5">5 Stars - Flawless Service</option>
-                    <option value="4">4 Stars - Highly Reliable</option>
-                    <option value="3">3 Stars - Satisfactory Escrow</option>
-                    <option value="2">2 Stars - Suboptimal Delay</option>
-                    <option value="1">1 Star - Infringement/Conflict</option>
-                  </select>
+                <div class="stats-bar">
+                    <div class="stat-item"><i class="fa-solid fa-users"></i> <div><strong>5K+</strong><p>Trusted Members</p></div></div>
+                    <div class="stat-item"><i class="fa-solid fa-circle-check"></i> <div><strong>2K+</strong><p>Successful Deals</p></div></div>
+                    <div class="stat-item"><i class="fa-solid fa-headset"></i> <div><strong>24/7</strong><p>Active Support</p></div></div>
+                    <div class="stat-item"><i class="fa-solid fa-lock"></i> <div><strong>100%</strong><p>Safe & Secure</p></div></div>
                 </div>
-                <div class="form-group">
-                  <label>Your Review Statement</label>
-                  <textarea id="review-text-input" rows="3" placeholder="Type out your transaction reviews here... Everyone on the web will see this review instantly." required></textarea>
+
+                <section id="about" class="card about-card">
+                    <div class="about-icon">
+                        <i class="fa-brands fa-discord"></i>
+                    </div>
+                    <div class="about-text">
+                        <h3>ABOUT OUR MARKETPLACE</h3>
+                        <p>G2G Marketplace is a professional Discord community focused on secure trading, fast ticket support, safe ID transfers, regular giveaways, and trusted middleman services. We are dedicated to maintaining trust and transparency in every deal.</p>
+                    </div>
+                </section>
+
+                <section id="features" class="features-section">
+                    <h3>OUR FEATURES</h3>
+                    <div class="features-grid">
+                        <div class="feature-box">
+                            <i class="fa-solid fa-shield-halved feature-icon"></i>
+                            <div>
+                                <h4>Trusted Middleman</h4>
+                                <p>Verified middleman services for safe deals.</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <i class="fa-solid fa-headset feature-icon"></i>
+                            <div>
+                                <h4>Fast Ticket Support</h4>
+                                <p>Quick response from our active support team.</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <i class="fa-solid fa-lock feature-icon"></i>
+                            <div>
+                                <h4>Safe Trading Channels</h4>
+                                <p>Dedicated channels for secure trading.</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <i class="fa-solid fa-right-left feature-icon"></i>
+                            <div>
+                                <h4>ID Transfers</h4>
+                                <p>Safe and smooth account transfers.</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <i class="fa-solid fa-gift feature-icon"></i>
+                            <div>
+                                <h4>Regular Giveaways</h4>
+                                <p>We host giveaways regularly for members.</p>
+                            </div>
+                        </div>
+                        <div class="feature-box">
+                            <i class="fa-solid fa-users-gear feature-icon"></i>
+                            <div>
+                                <h4>Community Driven</h4>
+                                <p>React, comment and share your feedback.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="card giveaway-card">
+                    <div class="giveaway-content">
+                        <i class="fa-solid fa-gift large-gift-icon"></i>
+                        <div>
+                            <h3>GIVEAWAYS</h3>
+                            <p>We host giveaways regularly for active members!</p>
+                        </div>
+                    </div>
+                    <div class="gift-box-graphic">🎁</div>
                 </div>
-                <button type="submit" class="btn btn-primary">Publish Review to Public Grid</button>
-              </form>
+
             </div>
 
-            <!-- Review list output panel -->
-            <div class="reviews-list-wrapper">
-              <h3 class="section-title">Verified Public Ledger Grid</h3>
-              <div class="reviews-grid" id="reviews-card-container">
-                <!-- Dynamically populated reviews -->
-              </div>
-            </div>
+            <aside class="sidebar">
+                
+                <div id="team" class="sidebar-card">
+                    <h3>VERIFIED TEAM MEMBERS</h3>
+                    <ul class="team-list">
+                        <li>
+                            <span class="user-info"><i class="fa-solid fa-crown rank-owner"></i> @wrage4x1</span>
+                            <i class="fa-solid fa-circle-check verified-badge"></i>
+                        </li>
+                        <li>
+                            <span class="user-info"><i class="fa-solid fa-star rank-admin"></i> @prashant6700</span>
+                            <i class="fa-solid fa-circle-check verified-badge"></i>
+                        </li>
+                        <li>
+                            <span class="user-info"><i class="fa-solid fa-diamond rank-staff"></i> @6bmp</span>
+                            <i class="fa-solid fa-circle-check verified-badge"></i>
+                        </li>
+                    </ul>
+                </div>
 
-          </div>
+                <div id="reviews" class="sidebar-card">
+                    <h3>RECENT REVIEWS</h3>
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="reviewer">AlphaX</span>
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p>Very trusted marketplace! Fast middleman and very helpful staff.</p>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="reviewer">ZoroX</span>
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p>Safe deals, quick support, and amazing community!</p>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="reviewer">NightFury</span>
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p>One of the best middleman servers I've ever joined.</p>
+                    </div>
+                </div>
+
+            </aside>
         </div>
-      </section>
 
-      <!-- TAB 7: PROFILE -->
-      <section id="view-profile" class="view-panel animate-fade-in hidden">
-        <div class="glass-container">
-          <div class="glass-header">
-            <h2>Your Secure Account Profile</h2>
-            <p class="subtitle">Cryptographic verification ledger overview</p>
-          </div>
-          <div class="glass-body">
-            <div class="profile-card">
-              <div class="profile-avatar">
-                <span id="profile-initial">U</span>
-                <span class="pulsing-green-dot"></span>
-              </div>
-              <div class="profile-details-grid">
-                <div class="detail-item">
-                  <span class="lbl">Username Access ID</span>
-                  <span class="val font-mono" id="profile-usr">@username</span>
-                </div>
-                <div class="detail-item">
-                  <span class="lbl">Registered Email Hash</span>
-                  <span class="val" id="profile-email">email@g2g.com</span>
-                </div>
-                <div class="detail-item">
-                  <span class="lbl">Associated Discord</span>
-                  <span class="val text-indigo" id="profile-discord">discord#1234</span>
-                </div>
-                <div class="detail-item">
-                  <span class="lbl">Level &amp; clearance status</span>
-                  <span class="val-badge" id="profile-role">Cleared / Active</span>
-                </div>
-              </div>
+        <section class="cta-banner">
+            <div class="cta-text">
+                <h2>READY TO TRADE SAFELY?</h2>
+                <p>Join our Discord server and become a part of our trusted community today!</p>
             </div>
-
-            <!-- Admin Console (Visible for Owner / Admins only) -->
-            <div id="admin-management-section" class="admin-section hidden">
-              <h3 class="section-title text-red">Systems Admin Console &amp; Platform Register</h3>
-              <div class="table-scroll">
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th>Member Tag</th>
-                      <th>Email Channel</th>
-                      <th>Discord Sync</th>
-                      <th>Clearing Level</th>
-                      <th>Registry State</th>
-                      <th>Moderator Controls</th>
-                    </tr>
-                  </thead>
-                  <tbody id="user-registry-tbody">
-                    <!-- Loaded dynamically -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
+            <a href="https://discord.gg/xjeHqgyZH" target="_blank" class="btn btn-discord-large"><i class="fa-brands fa-discord"></i> JOIN DISCORD</a>
+        </section>
 
     </main>
 
-    <!-- Footer System Status -->
-    <footer class="main-footer-status">
-      <div class="footer-content">
-        <div class="system-markers">
-          <span><i data-lucide="server"></i> GATEWAY_NODE: <strong>RUNNING</strong></span>
-          <span><i data-lucide="key"></i> MATRIX_ENC: <strong>AES_256_GCM</strong></span>
-          <span><i data-lucide="activity"></i> STATE: <strong class="pulse">SYNCHRONIZED</strong></span>
+    <footer id="contact">
+        <p>&copy; 2026 G2G Marketplace. All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-discord"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
         </div>
-        <div class="copyright">
-          © 2026 G2G Marketplace escrow. Built with production security.
-        </div>
-      </div>
     </footer>
-  </div>
 
-  <script src="script.js"></script>
+    <script>
+        function logoutUser() {
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "auth.html";
+        }
+    </script>
 </body>
 </html>
