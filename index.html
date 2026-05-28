@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G2G Marketplace</title>
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -169,16 +170,22 @@
 </head>
 <body>
 
+    <!-- MATRIX EFFECTS CANVAS -->
     <canvas id="imusama-canvas-matrix"></canvas>
 
+    <!-- ==========================================================================
+       ISOLATED GATEWAY ACCESS MANAGEMENT (AUTHENTICATION SCREEN CONTAINER)
+       ========================================================================== -->
     <div id="application-gateway-view" class="auth-portal-wrapper">
         <div class="auth-logo">
             <i class="fa-solid fa-shield-halved"></i> G2G MARKETPLACE
         </div>
 
+        <!-- URL EXPLICIT ERROR ELEMENT BANNER -->
         <div id="url-error-banner">Error: Paste your Firebase URL inside index.html on line 273!</div>
 
         <div class="auth-box">
+            <!-- REGISTER SUITE -->
             <div id="signup-form-container">
                 <h2>Sign Up</h2>
                 <p class="subtitle">Create your account to get started</p>
@@ -231,6 +238,7 @@
                 </div>
             </div>
 
+            <!-- SECURE LOG IN SUITE -->
             <div id="login-form-container" style="display: none;">
                 <h2>Log In</h2>
                 <p class="subtitle">Welcome back! Access your account</p>
@@ -267,8 +275,12 @@
     </div>
 
 
+    <!-- ==========================================================================
+       PRIMARY PLATFORM FRAMEWORK OPERATIONAL SCREEN (HIDDEN ON ZERO-LOGINS)
+       ========================================================================== -->
     <div id="application-dashboard-view" style="display: none; flex-direction: column; min-height: 100vh;">
         
+        <!-- NAVBAR CONTAINER AREA -->
         <header class="navbar">
             <div class="logo">
                 <i class="fa-solid fa-shield-halved"></i> G2G MARKETPLACE
@@ -287,8 +299,10 @@
             </div>
         </header>
 
+        <!-- CONTENT SLIDES CONTAINER PORTS -->
         <main class="container">
 
+            <!-- ================= HOME SLIDE ================= -->
             <div id="slide-home" class="page-slide active">
                 <div class="layout-grid-home">
                     <section class="hero">
@@ -317,6 +331,7 @@
                 </div>
             </div>
 
+            <!-- ================= ABOUT SLIDE ================= -->
             <div id="slide-about" class="page-slide">
                 <div class="slide-card-presentation">
                     <div class="presentation-header">
@@ -340,6 +355,7 @@
                 </div>
             </div>
 
+            <!-- ================= FEATURES SLIDE ================= -->
             <div id="slide-features" class="page-slide">
                 <div class="slide-card-presentation">
                     <div class="presentation-header">
@@ -368,6 +384,7 @@
                 </div>
             </div>
 
+            <!-- ================= TEAM SLIDE ================= -->
             <div id="slide-team" class="page-slide">
                 <div class="slide-card-presentation">
                     <div class="presentation-header">
@@ -393,6 +410,7 @@
                 </div>
             </div>
 
+            <!-- ================= REVIEWS SLIDE ================= -->
             <div id="slide-reviews" class="page-slide">
                 <div class="slide-card-presentation">
                     <div class="presentation-header">
@@ -425,10 +443,12 @@
                     </div>
 
                     <div id="dynamic-reviews-grid" class="reviews-grid-premium">
-                        </div>
+                        <!-- Dynamic reviews load here -->
+                    </div>
                 </div>
             </div>
 
+            <!-- ================= PROFILE & MEMBERS DIRECTORY SLIDE ================= -->
             <div id="slide-profile" class="page-slide">
                 <div class="slide-card-presentation">
                     <div class="presentation-header">
@@ -464,6 +484,7 @@
 
         </main>
 
+        <!-- FOOTER ARCHITECTURE -->
         <footer>
             <p>&copy; 2026 G2G Marketplace. All Rights Reserved.</p>
             <p>Global Realtime Cloud Database Connected.</p>
@@ -471,6 +492,9 @@
     </div>
 
 
+    <!-- ==========================================================================
+       INTERACTIVE CORE LOGIC & DATA HANDLING ENGINE
+       ========================================================================== -->
     <script>
         // PASTE YOUR FIREBASE URL IN THE STRING VARIABLE BELOW 👇
         const firebaseDatabaseURL = "https://g2g1-31e7d-default-rtdb.firebaseio.com";
@@ -551,13 +575,12 @@
                 return;
             }
 
-            // Fixed logic to ensure we don't accidentally intercept string-based system messages
             fetch(`${firebaseDatabaseURL}/users/${user}.json`)
                 .then(res => res.json())
                 .then(existingUser => {
                     if (existingUser && typeof existingUser === 'object' && existingUser.password) {
                         alert("Registration Blocked: Username is already taken.");
-                        return;
+                        return null;
                     }
 
                     const userProfilePacket = {
@@ -592,14 +615,17 @@
             fetch(`${firebaseDatabaseURL}/users/${user}.json`)
                 .then(res => res.json())
                 .then(globalUserData => {
-                    if (globalUserData && typeof globalUserData === 'object' && globalUserData.password === pass) {
-                        localStorage.setItem("isLoggedIn", "true");
-                        localStorage.setItem("activeSessionUser", user);
-                        alert("Handshake complete. Access granted!");
-                        evaluateSessionStatus();
-                    } else {
-                        alert("Invalid username or password!");
+                    // Safe verification fallback processing logic
+                    if (globalUserData && typeof globalUserData === 'object') {
+                        if (globalUserData.password === pass || (globalUserData[user] && globalUserData[user].password === pass)) {
+                            localStorage.setItem("isLoggedIn", "true");
+                            localStorage.setItem("activeSessionUser", user);
+                            alert("Handshake complete. Access granted!");
+                            evaluateSessionStatus();
+                            return;
+                        }
                     }
+                    alert("Invalid username or password!");
                 })
                 .catch(err => alert("Database system connection timeout: " + err));
         }
@@ -636,7 +662,11 @@
 
                     Object.keys(users).forEach(username => {
                         let uData = users[username];
-                        if (uData && typeof uData === 'object' && uData.email) {
+                        if (uData && typeof uData === 'object') {
+                            // Extract internal layout properties correctly
+                            let finalEmail = uData.email || (uData[username] ? uData[username].email : 'Hidden');
+                            let finalDiscord = uData.discord || (uData[username] ? uData[username].discord : 'None');
+                            
                             let isMeBadge = (username === currentUser) ? `<span class="me-pill">You</span>` : "";
                             cardHTML += `
                                 <div class="member-chip-card">
@@ -645,8 +675,8 @@
                                         ${isMeBadge}
                                     </div>
                                     <div class="m-details">
-                                        <p><i class="fa-solid fa-envelope"></i> ${uData.email || 'Hidden'}</p>
-                                        <p><i class="fa-brands fa-discord"></i> Discord: <span>${uData.discord || 'None'}</span></p>
+                                        <p><i class="fa-solid fa-envelope"></i> ${finalEmail}</p>
+                                        <p><i class="fa-brands fa-discord"></i> Discord: <span>${finalDiscord}</span></p>
                                     </div>
                                 </div>
                             `;
