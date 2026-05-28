@@ -3,217 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketplace Gateway - Access Panel</title>
+    <title>G2G Marketplace - Access Portal</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
-        }
-        .auth-container-shell {
-            width: 100%;
-            max-width: 450px;
-            padding: 20px;
-        }
-        .auth-card {
-            background: #0b1329;
-            border: 1px solid #1e293b;
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
-        .auth-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #2563eb);
-            border-top-left-radius: 16px; border-top-right-radius: 16px;
-        }
-        .auth-header { text-align: center; margin-bottom: 30px; }
-        .auth-header i { font-size: 2.5rem; color: #3b82f6; margin-bottom: 15px; }
-        .auth-header h2 { font-size: 1.6rem; color: #fff; font-weight: 800; }
-        .auth-header p { color: #64748b; font-size: 0.88rem; margin-top: 5px; }
-        
-        .form-input-wrapper { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
-        .form-input-wrapper label { font-size: 0.78rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
-        .input-icon-row { position: relative; }
-        .input-icon-row i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #475569; font-size: 0.95rem; }
-        .input-icon-row input {
-            width: 100%; background: #020617; border: 1px solid #1e293b; border-radius: 8px;
-            padding: 13px 14px 13px 42px; color: white; font-size: 0.95rem; transition: all 0.2s;
-        }
-        .input-icon-row input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); }
-        
-        .auth-toggle-hint { text-align: center; margin-top: 25px; font-size: 0.88rem; color: #64748b; }
-        .auth-toggle-hint span { color: #3b82f6; cursor: pointer; font-weight: 600; text-decoration: underline; }
-        .auth-toggle-hint span:hover { color: #2563eb; }
-        
-        .btn-full { width: 100%; justify-content: center; padding: 13px; font-size: 0.95rem; border: none; cursor: pointer; margin-top: 10px; }
+        body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background-color: #020617; padding: 20px; }
+        .auth-logo { font-size: 1.5rem; font-weight: 800; color: #3b82f6; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .auth-box { width: 100%; max-width: 450px; background: linear-gradient(145deg, #0b1329, #050b18); border: 1px solid #1e293b; border-radius: 12px; padding: 35px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .auth-box h2 { text-align: center; font-size: 2rem; letter-spacing: 1px; margin-bottom: 5px; text-transform: uppercase; color: #fff; }
+        .auth-box .subtitle { text-align: center; color: #64748b; font-size: 0.9rem; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.75rem; font-weight: 700; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .input-wrapper i { position: absolute; left: 15px; color: #475569; font-size: 0.95rem; }
+        .input-wrapper input { width: 100%; padding: 12px 15px 12px 45px; background-color: #020617; border: 1px solid #1e293b; border-radius: 8px; color: white; font-size: 0.95rem; transition: all 0.3s; }
+        .input-wrapper input:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
+        .checkbox-group { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #94a3b8; margin-bottom: 25px; }
+        .checkbox-group a { color: #3b82f6; text-decoration: none; }
+        .btn-submit { width: 100%; background: #2563eb; color: white; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: all 0.3s; text-transform: uppercase; }
+        .btn-submit:hover { background: #1d4ed8; box-shadow: 0 0 15px rgba(37, 99, 235, 0.5); }
+        .auth-footer { text-align: center; margin-top: 25px; font-size: 0.9rem; color: #94a3b8; }
+        .auth-footer button { background: none; border: none; color: #3b82f6; font-weight: 600; cursor: pointer; padding: 0 5px; text-decoration: underline; }
+        .badge-footer { margin-top: 25px; width: 100%; max-width: 450px; border: 1px solid #1e293b; border-radius: 8px; padding: 12px; text-align: center; font-size: 0.85rem; color: #64748b; background: #050b18; }
+        .badge-footer span { margin: 0 10px; }
+        .badge-footer i { color: #3b82f6; margin-right: 4px; }
     </style>
 </head>
 <body>
 
-    <div class="auth-container-shell">
-        <!-- ACCESS LOGIN CONTAINER SCREEN -->
-        <div id="box-login" class="auth-card">
-            <div class="auth-header">
-                <i class="fa-solid fa-lock"></i>
-                <h2>Operator Login Terminal</h2>
-                <p>Provide valid operational credentials to unlock the deck</p>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="auth-logo">
+            <i class="fa-solid fa-shield-halved"></i> G2G MARKETPLACE
+        </div>
+
+        <div class="auth-box">
+            <div id="signup-form-container">
+                <h2>Sign Up</h2>
+                <p class="subtitle">Create your account to get started</p>
+                <form id="signup-form" onsubmit="handleSignUp(event)">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="signup-username" placeholder="Choose a username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" id="signup-email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="signup-password" placeholder="Create a password" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Discord Username (Optional)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-brands fa-discord"></i>
+                            <input type="text" id="signup-discord" placeholder="Enter your Discord username">
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms" style="margin:0; font-size:0.85rem; color:#94a3b8; text-transform:none;">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fa-solid fa-user-plus"></i> Sign Up <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+                <div class="auth-footer">
+                    Already have an account? <button onclick="toggleForm(false)">Log in</button>
+                </div>
             </div>
-            
-            <form onsubmit="handleLogIn(event)">
-                <div class="form-input-wrapper">
-                    <label>Username Account ID</label>
-                    <div class="input-icon-row">
-                        <i class="fa-solid fa-user-astronaut"></i>
-                        <input type="text" id="login-user" placeholder="Enter username..." autocomplete="off" required>
+
+            <div id="login-form-container" style="display: none;">
+                <h2>Log In</h2>
+                <p class="subtitle">Welcome back! Access your account</p>
+                <form id="login-form" onsubmit="handleLogIn(event)">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="login-username" placeholder="Enter your username" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-input-wrapper">
-                    <label>Security Password Hash</label>
-                    <div class="input-icon-row">
-                        <i class="fa-solid fa-key"></i>
-                        <input type="password" id="login-pass" placeholder="Enter security passphrase..." required>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="login-password" placeholder="Enter your password" required>
+                        </div>
                     </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fa-solid fa-right-to-bracket"></i> Log In <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+                <div class="auth-footer">
+                    Don't have an account? <button onclick="toggleForm(true)">Sign up</button>
                 </div>
-                <button type="submit" class="btn btn-discord btn-full"><i class="fa-solid fa-right-to-bracket"></i> UNLOCK SYSTEM ACCESS</button>
-            </form>
-            
-            <div class="auth-toggle-hint">
-                New network contractor? <span onclick="togglePanels('register')">Register Account Key</span>
             </div>
         </div>
 
-        <!-- NEW IDENTITY REGISTRATION CONTAINER SCREEN -->
-        <div id="box-register" class="auth-card" style="display: none;">
-            <div class="auth-header">
-                <i class="fa-solid fa-user-plus"></i>
-                <h2>Create Identity Profile</h2>
-                <p>Register parameters securely onto the cloud database</p>
-            </div>
-            
-            <form onsubmit="handleRegister(event)">
-                <div class="form-input-wrapper">
-                    <label>Choose Username Access ID</label>
-                    <div class="input-icon-row">
-                        <i class="fa-solid fa-user-tag"></i>
-                        <input type="text" id="reg-user" placeholder="Create alphanumeric user ID..." autocomplete="off" required>
-                    </div>
-                </div>
-                <div class="form-input-wrapper">
-                    <label>Contact Email Hash</label>
-                    <div class="input-icon-row">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" id="reg-email" placeholder="user@domain.com" autocomplete="off" required>
-                    </div>
-                </div>
-                <div class="form-input-wrapper">
-                    <label>Discord Identity String</label>
-                    <div class="input-icon-row">
-                        <i class="fa-brands fa-discord"></i>
-                        <input type="text" id="reg-discord" placeholder="username or global name" autocomplete="off" required>
-                    </div>
-                </div>
-                <div class="form-input-wrapper">
-                    <label>Account Passphrase Lock</label>
-                    <div class="input-icon-row">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <input type="password" id="reg-pass" placeholder="Construct a resilient password..." required>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-discord btn-full" style="background-color: #10b981;"><i class="fa-solid fa-id-card"></i> GENERATE NEW IDENTITY</button>
-            </form>
-            
-            <div class="auth-toggle-hint">
-                Already have an active pass? <span onclick="togglePanels('login')">Return to Login Terminal</span>
-            </div>
+        <div class="badge-footer">
+            <span><i class="fa-solid fa-circle-check"></i> Secure</span> • 
+            <span><i class="fa-solid fa-circle-check"></i> Trusted</span> • 
+            <span><i class="fa-solid fa-circle-check"></i> Professional</span>
         </div>
     </div>
 
     <script>
-        // ⚠️ PASTE YOUR REALTIME DATABASE URL LINK RIGHT BELOW HERE (NO '/' AT THE END):
-        const firebaseDatabaseURL = "YOUR_FIREBASE_DATABASE_URL_HERE";
+        // --- EMBEDDED FIREBASE CORE LINK CONFIGURATION ---
+        const firebaseDatabaseURL = "https://g2g1-31e7d-default-rtdb.firebaseio.com";
 
-        function togglePanels(panelTarget) {
-            if (panelTarget === 'register') {
-                document.getElementById("box-login").style.display = "none";
-                document.getElementById("box-register").style.display = "block";
-            } else {
-                document.getElementById("box-register").style.display = "none";
-                document.getElementById("box-login").style.display = "block";
-            }
+        function toggleForm(showSignUp) {
+            document.getElementById("signup-form-container").style.display = showSignUp ? "block" : "none";
+            document.getElementById("login-form-container").style.display = showSignUp ? "none" : "block";
         }
 
-        function handleRegister(e) {
+        function handleSignUp(e) {
             e.preventDefault();
-            const usernameInput = document.getElementById("reg-user").value.trim();
-            const emailInput = document.getElementById("reg-email").value.trim();
-            const discordInput = document.getElementById("reg-discord").value.trim();
-            const passwordInput = document.getElementById("reg-pass").value;
+            const user = document.getElementById("signup-username").value.trim();
+            const email = document.getElementById("signup-email").value.trim();
+            const pass = document.getElementById("signup-password").value;
+            const confirmPass = document.getElementById("signup-confirm").value;
+            const discordHandle = document.getElementById("signup-discord").value.trim();
 
-            if (firebaseDatabaseURL.includes("YOUR_FIREBASE_DATABASE_URL_HERE")) {
-                alert("Configuration Error: Add your Firebase URL link inside auth.html on line 115!");
+            if (pass !== confirmPass) {
+                alert("Passwords do not match!");
                 return;
             }
 
-            // First check if user already exists globally on Firebase
-            fetch(`${firebaseDatabaseURL}/users/${usernameInput}.json`)
+            // Check if username is already taken globally
+            fetch(`${firebaseDatabaseURL}/users/${user}.json`)
                 .then(res => res.json())
                 .then(existingUser => {
                     if (existingUser) {
-                        alert("Identity Allocation Failed: This Username ID is already taken by another user globally.");
+                        alert("Account creation failed: Username is already taken.");
                         return;
                     }
 
-                    // Write profile straight into global database cluster
                     const userProfilePacket = {
-                        username: usernameInput,
-                        email: emailInput,
-                        discord: discordInput,
-                        password: passwordInput
+                        username: user,
+                        email: email,
+                        discord: discordHandle || "Not Linked",
+                        password: pass
                     };
 
-                    return fetch(`${firebaseDatabaseURL}/users/${usernameInput}.json`, {
+                    // Write user profile to global cloud database
+                    return fetch(`${firebaseDatabaseURL}/users/${user}.json`, {
                         method: "PUT",
                         body: JSON.stringify(userProfilePacket),
                         headers: { "Content-Type": "application/json" }
                     });
                 })
                 .then(response => {
-                    if(!response) return; 
-                    alert("Identity profile generated globally across cloud node! Transferring to login terminal...");
-                    togglePanels('login');
+                    if (!response) return;
+                    alert("Account created successfully! Please log in.");
+                    toggleForm(false);
+                    document.getElementById("login-username").value = user;
                 })
-                .catch(err => alert("Cloud registration pipeline failure: " + err));
+                .catch(err => alert("Cloud registration failure: " + err));
         }
 
         function handleLogIn(e) {
             e.preventDefault();
-            const userCheck = document.getElementById("login-user").value.trim();
-            const passCheck = document.getElementById("login-pass").value;
+            const user = document.getElementById("login-username").value.trim();
+            const pass = document.getElementById("login-password").value;
 
-            if (firebaseDatabaseURL.includes("YOUR_FIREBASE_DATABASE_URL_HERE")) {
-                alert("Configuration Error: Add your Firebase URL link inside auth.html on line 115!");
-                return;
-            }
-
-            // Authenticate directly by polling user record from Firebase
-            fetch(`${firebaseDatabaseURL}/users/${userCheck}.json`)
+            // Verify details from Firebase cloud registry
+            fetch(`${firebaseDatabaseURL}/users/${user}.json`)
                 .then(res => res.json())
                 .then(globalUserData => {
-                    if (globalUserData && globalUserData.password === passCheck) {
+                    if (globalUserData && globalUserData.password === pass) {
                         localStorage.setItem("isLoggedIn", "true");
-                        localStorage.setItem("activeSessionUser", userCheck);
-                        alert("Security handshake success. Relaying parameters to control hub...");
+                        localStorage.setItem("activeSessionUser", user);
+                        alert("Handshake complete. Access granted!");
                         window.location.href = "./index.html";
                     } else {
-                        alert("Access Denied: Invalid Operator ID or password hash matches nothing in the cloud registry.");
+                        alert("Invalid username or password!");
                     }
                 })
-                .catch(err => alert("Database system access timeout: " + err));
+                .catch(err => alert("Database system connection timeout: " + err));
         }
     </script>
 </body>
