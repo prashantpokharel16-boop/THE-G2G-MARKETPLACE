@@ -4,142 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trusted Middleman Network</title>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* ==========================================================================
-           CORE STYLES & LAYOUT
-           ========================================================================== */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
-        body { background-color: #020617; color: #e2e8f0; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
-
-        /* HEADER & NAVIGATION */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background-color: rgba(2, 6, 23, 0.95); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #1e293b; }
-        .logo { font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; letter-spacing: 0.5px; }
-        .logo i { color: #3b82f6; }
-        
-        nav { display: flex; gap: 5px; }
-        .nav-btn { background: none; border: none; padding: 8px 16px; font-size: 0.9rem; color: #94a3b8; cursor: pointer; font-weight: 500; transition: all 0.3s; text-decoration: none; }
-        .nav-btn:hover, .nav-btn.active { color: #3b82f6; }
-
-        .nav-right-actions { display: flex; align-items: center; gap: 15px; }
-        .btn-discord-nav { background-color: #2563eb; color: white; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s; }
-        .btn-discord-nav:hover { background-color: #1d4ed8; }
-        
-        .btn-login-trigger { background: transparent; border: 1px solid #334155; color: #e2e8f0; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-        .btn-login-trigger:hover { background: #1e293b; border-color: #475569; }
-
-        /* CONTAINERS & PAGES */
-        .container { max-width: 1200px; width: 100%; margin: 30px auto; padding: 0 20px; flex: 1; }
-        .page-slide { display: none; }
-        .page-slide.active { display: block; }
-
-        /* ==========================================================================
-           HOME PAGE GRID DESIGN (MATCHING SCREENSHOT)
-           ========================================================================== */
-        .hero-section { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; margin-bottom: 40px; align-items: center; }
-        .hero-text h1 { font-size: 2.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 15px; letter-spacing: -0.5px; }
-        .highlight-blue { color: #3b82f6; }
-        .hero-subtitle { color: #94a3b8; font-size: 1.1rem; margin-bottom: 25px; }
-        .hero-buttons { display: flex; gap: 15px; }
-        
-        .btn-primary { background: #2563eb; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-secondary { background: #1e293b; color: white; border: 1px solid #334155; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-        
-        .hero-shield-wrapper { display: flex; justify-content: center; align-items: center; position: relative; }
-        .shield-display-card { width: 260px; height: 280px; background: radial-gradient(circle, #1e3a8a 0%, #020617 100%); border: 3px solid #3b82f6; border-radius: 20px; display: flex; justify-content: center; align-items: center; font-size: 5rem; color: #3b82f6; box-shadow: 0 0 50px rgba(59, 130, 246, 0.3); }
-
-        <div class="metrics-bar">
-                <div class="metric-item"><i class="fa-solid fa-users"></i><div><h3>5K+</h3><p>Trusted Members</p></div></div>
-                <div class="metric-item"><i class="fa-solid fa-circle-check"></i><div><h3>2K+</h3><p>Successful Deals</p></div></div>
-                <div class="metric-item"><i class="fa-solid fa-headset"></i><div><h3>24/7</h3><p>Active Support</p></div></div>
-                <div class="metric-item"><i class="fa-solid fa-lock"></i><div><h3>100%</h3><p>Safe & Secure</p></div></div>
-            </div>
-
-        /* MAIN CONTENT SPLIT LAYOUT */
-        .main-split-layout { display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 25px; }
-        
-        .content-card-panel { background: #070d1e; border: 1px solid #1e293b; border-radius: 12px; padding: 25px; margin-bottom: 25px; }
-        .panel-title { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 15px; color: #fff; display: flex; align-items: center; gap: 10px; }
-        .panel-text { color: #94a3b8; font-size: 0.92rem; line-height: 1.6; }
-
-        /* FEATURES BLOCKS GRID */
-        .features-subgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .feature-mini-box { background: rgba(15, 23, 42, 0.5); border: 1px solid #1e293b; border-radius: 8px; padding: 15px; }
-        .feature-mini-box h4 { font-size: 0.95rem; color: #fff; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .feature-mini-box h4 i { color: #3b82f6; }
-        .feature-mini-box p { font-size: 0.82rem; color: #64748b; line-height: 1.4; }
-
-        /* SIDE PANEL SYSTEM DECK */
-        .side-deck-list { display: flex; flex-direction: column; gap: 12px; }
-        .user-row-card { background: #070d1e; border: 1px solid #1e293b; border-radius: 8px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; }
-        .user-info-side { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.9rem; }
-        .user-info-side i { color: #a855f7; }
-        .user-info-side.admin-i i { color: #eab308; }
-        .user-info-side.owner-i i { color: #c084fc; }
-        .verified-badge-check { color: #3b82f6; font-size: 0.85rem; }
-
-        /* REVIEWS LIST FEED */
-        .review-feed-item { background: #070d1e; border: 1px solid #1e293b; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
-        .review-feed-header { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 8px; }
-        .review-feed-user { font-weight: 600; color: #fff; }
-        .review-feed-stars { color: #eab308; }
-        .review-feed-text { font-size: 0.85rem; color: #94a3b8; font-style: italic; line-height: 1.4; }
-
-        /* ==========================================================================
-           TAB EXPANDED PAGES STYLING (BIG PRESENTATION LAYOUTS)
-           ========================================================================== */
-        .presentation-view-box { background: linear-gradient(160deg, #070d1e 0%, #030712 100%); border: 1px solid #1e293b; border-radius: 16px; padding: 40px; }
-        .presentation-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 15px; }
-        .presentation-header h2 { font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
-        .presentation-body { font-size: 1rem; color: #94a3b8; line-height: 1.7; }
-        .presentation-grid-3x { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 25px; }
-        .big-card-block { background: rgba(2, 6, 23, 0.6); border: 1px solid #1e293b; border-radius: 12px; padding: 25px; }
-        .big-card-block i { font-size: 1.8rem; color: #3b82f6; margin-bottom: 15px; display: block; }
-        .big-card-block h3 { color: #fff; margin-bottom: 10px; font-size: 1.15rem; }
-
-        /* ==========================================================================
-           MODAL LOGIN SYSTEM INTERFACE
-           ========================================================================== */
-        .login-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(4px); justify-content: center; align-items: center; z-index: 2000; }
-        .login-card-container { background: #0b1329; border: 1px solid #1e293b; width: 100%; max-width: 380px; border-radius: 12px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative; }
-        .login-card-header { text-align: center; margin-bottom: 25px; }
-        .login-card-header i { font-size: 2.2rem; color: #3b82f6; margin-bottom: 10px; }
-        .login-card-header h3 { font-size: 1.25rem; color: #fff; }
-        .login-card-header p { font-size: 0.8rem; color: #64748b; margin-top: 4px; }
-        
-        .form-group-block { margin-bottom: 18px; }
-        .form-group-block label { display: block; font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase; }
-        .login-input-field { width: 100%; background: #020617; border: 1px solid #1e293b; border-radius: 6px; color: white; padding: 11px 14px; font-size: 0.9rem; }
-        .login-input-field:focus { outline: none; border-color: #3b82f6; }
-        
-        .btn-submit-login { width: 100%; background: #2563eb; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
-        .btn-submit-login:hover { background: #1d4ed8; }
-        .close-modal-cross { position: absolute; top: 15px; right: 15px; background: none; border: none; color: #64748b; font-size: 1.1rem; cursor: pointer; }
-
-        /* ==========================================================================
-           PRIVATE ADMIN DASHBOARD SYSTEM INTERFACE
-           ========================================================================== */
-        .admin-dashboard-wrapper { background: #040814; border: 2px solid #eab308; border-radius: 12px; padding: 30px; margin-bottom: 30px; }
-        .admin-header-strip { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 15px; margin-bottom: 25px; }
-        .admin-badge-tag { background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.3); color: #eab308; font-size: 0.75rem; font-weight: bold; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; }
-        
-        .admin-metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 25px; }
-        .admin-stat-card { background: #0b1329; border: 1px solid #1e293b; padding: 20px; border-radius: 8px; border-left: 4px solid #eab308; }
-        .admin-stat-card p { font-size: 0.8rem; color: #64748b; text-transform: uppercase; font-weight: 700; }
-        .admin-stat-card h4 { font-size: 1.8rem; color: #fff; margin-top: 5px; }
-
-        /* FOOTER BRANDING PANEL */
-        footer { border-top: 1px solid #1e293b; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; color: #475569; font-size: 0.8rem; margin-top: auto; background: #01040d; }
-        
-        @media (max-width: 900px) {
-            .hero-section, .main-split-layout, .metrics-bar, .presentation-grid-3x, .admin-metrics-grid { grid-template-columns: 1fr; }
-            .navbar { flex-direction: column; gap: 15px; }
-        }
-    </style>
+    <!-- Main Style Sheet Links -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- PLATFORM HEADER NAVIGATION -->
     <header class="navbar">
         <div class="logo">
             <i class="fa-solid fa-shield-halved"></i> TRUSTED MIDDLEMAN NETWORK
@@ -160,12 +32,14 @@
         </div>
     </header>
 
+    <!-- MAIN INTERFACE MAIN CONTENT VIEWPORT -->
     <main class="container">
 
+        <!-- PRIVATE ADMIN CONTROL PANEL MODULE (HIDDEN BY DEFAULT) -->
         <div id="private-admin-panel" style="display: none;">
             <div class="admin-dashboard-wrapper">
                 <div class="admin-header-strip">
-                    <h3><i class="fa-solid fa-lock-open" style="color:#eab308;"></i> Operational Control Panel</h3>
+                    <h3><i class="fa-solid fa-lock-open"></i> Operational Control Panel</h3>
                     <span class="admin-badge-tag">Authorized Access: @prashant</span>
                 </div>
                 
@@ -184,13 +58,13 @@
                     </div>
                 </div>
                 
-                <div class="panel-text" style="background: rgba(255,255,255,0.02); padding: 15px; border-radius: 6px; border: 1px solid #1e293b;">
-                    <strong style="color: #fff;"><i class="fa-solid fa-circle-info"></i> Security Monitor Memo:</strong> Realtime logs are running cleanly. Standard access filtering is tracking user profiles dynamically across network ports.
+                <div class="admin-memo-box">
+                    <strong><i class="fa-solid fa-circle-info"></i> Security Monitor Memo:</strong> Realtime logs are running cleanly. Standard access filtering is tracking user profiles dynamically across network ports.
                 </div>
             </div>
         </div>
 
-
+        <!-- HOME PAGE SLIDE -->
         <div id="slide-home" class="page-slide active">
             <div class="hero-section">
                 <div class="hero-text">
@@ -199,7 +73,7 @@
                     <p class="panel-text" style="max-width: 550px; margin-bottom: 25px;">We provide a secure and professional environment for all your trading needs. Your safety is our high priority at every tier of exchange operations.</p>
                     <div class="hero-buttons">
                         <a href="https://discord.gg/xjeHqgyZH" target="_blank" class="btn-primary"><i class="fa-brands fa-discord"></i> JOIN OUR DISCORD</a>
-                        <button onclick="switchTab('about')" class="btn-secondary" style="cursor: pointer;">LEARN MORE</button>
+                        <button onclick="switchTab('about')" class="btn-secondary">LEARN MORE</button>
                     </div>
                 </div>
                 <div class="hero-shield-wrapper">
@@ -209,6 +83,7 @@
                 </div>
             </div>
 
+            <!-- GRID BLOCK STATISTICS INFRASTRUCTURE COUNTERS -->
             <div class="metrics-bar">
                 <div class="metric-item"><i class="fa-solid fa-users"></i><div><h3>5K+</h3><p>Trusted Members</p></div></div>
                 <div class="metric-item"><i class="fa-solid fa-circle-check"></i><div><h3>2K+</h3><p>Successful Deals</p></div></div>
@@ -216,6 +91,7 @@
                 <div class="metric-item"><i class="fa-solid fa-lock"></i><div><h3>100%</h3><p>Safe & Secure</p></div></div>
             </div>
 
+            <!-- CORE GRID DIVISION CORES -->
             <div class="main-split-layout">
                 <div>
                     <div class="content-card-panel">
@@ -246,9 +122,9 @@
                     </div>
                 </div>
 
+                <!-- SIDEBAR INFORMATION SECTIONS LAYOUT -->
                 <div class="side-deck-list">
                     <div class="panel-title" style="margin-bottom: 5px;"><i class="fa-solid fa-user-gear"></i> Verified Team</div>
-                    
                     <div class="user-row-card">
                         <div class="user-info-side owner-i"><i class="fa-solid fa-crown"></i> @wrage4x1</div>
                         <i class="fa-solid fa-circle-check verified-badge-check"></i>
@@ -263,9 +139,8 @@
                     </div>
 
                     <div class="panel-title" style="margin-top: 15px; margin-bottom: 5px;"><i class="fa-solid fa-message"></i> Recent Reviews</div>
-                    
                     <div class="review-feed-item">
-                        <div class="review-feed-header"><span class="review-feed-user">AlphaX</span><span class="review-feed-stars">⭐⭐⭐⭐⭐</span></div>
+                        <div class="review-feed-header"><span class="review-feed-user">AlphaX</span><span class="review-feed-stars">⭐⭐⭐⭐•</span></div>
                         <p class="review-feed-text">"Very trusted server! Fast middleman and very helpful staff."</p>
                     </div>
                     <div class="review-feed-item">
@@ -280,78 +155,61 @@
             </div>
         </div>
 
+        <!-- ABOUT EXPANDED PRESENTATION TAB -->
         <div id="slide-about" class="page-slide">
             <div class="presentation-view-box">
                 <div class="presentation-header">
                     <h2><i class="fa-solid fa-circle-info text-blue"></i> Operational Protocols Ledger</h2>
                     <span class="page-badge">Section 01 // Overview</span>
                 </div>
-                <div class="presentation-body">
-                    <p>Our network acts as an expert digital verification third-party buffer to guarantee risk-free peer-to-peer exchanges. We intercept high-stakes profile parameter assets, handle security clears, and confirm that financial payment matches accurately before completing the final exchange loop parameter handoffs.</p>
-                </div>
+                <p class="presentation-body">Our network acts as an expert digital verification third-party buffer to guarantee risk-free peer-to-peer exchanges. We intercept high-stakes profile parameter assets, handle security clears, and confirm that financial payment matches accurately before completing the final exchange loop parameter handoffs.</p>
                 <div class="presentation-grid-3x">
-                    <div class="big-card-block">
-                        <i class="fa-solid fa-fingerprint"></i>
-                        <h3>Verification Sweep</h3>
-                        <p>Every asset is audited for ownership validation signatures before being checked into transaction storage buffers.</p>
-                    </div>
-                    <div class="big-card-block">
-                        <i class="fa-solid fa-vault"></i>
-                        <h3>Escrow Buffer Hold</h3>
-                        <p>Funds and properties are maintained inside isolated holding vectors to eliminate exit schemes entirely.</p>
-                    </div>
-                    <div class="big-card-block">
-                        <i class="fa-solid fa-bolt"></i>
-                        <h3>Instant Release</h3>
-                        <p>Automated verification sweeps unlock tracking parameters the moment payment logs hit confirmation targets.</p>
-                    </div>
+                    <div class="big-card-block"><i class="fa-solid fa-fingerprint"></i><h3>Verification Sweep</h3><p>Every asset is audited for ownership validation signatures before validation.</p></div>
+                    <div class="big-card-block"><i class="fa-solid fa-vault"></i><h3>Escrow Buffer Hold</h3><p>Funds and properties are maintained inside isolated holding vectors.</p></div>
+                    <div class="big-card-block"><i class="fa-solid fa-bolt"></i><h3>Instant Release</h3><p>Automated verification sweeps unlock tracking parameters instantly.</p></div>
                 </div>
             </div>
         </div>
 
+        <!-- FEATURES EXPANDED PRESENTATION TAB -->
         <div id="slide-features" class="page-slide">
             <div class="presentation-view-box">
                 <div class="presentation-header">
                     <h2><i class="fa-solid fa-layer-group text-blue"></i> Infrastructure Architecture Specs</h2>
                     <span class="page-badge">Section 02 // Core Systems</span>
                 </div>
-                <div class="presentation-body">
-                    <p>Explore the complete technological layer system backing our trade pipelines to ensure protection, consistency, and real-time support processing across all user desks.</p>
-                </div>
                 <div class="presentation-grid-3x">
                     <div class="big-card-block"><i class="fa-solid fa-user-lock"></i><h3>ID Vault Isolation</h3><p>Encrypted parameters protect profile credentials during transfer verification steps.</p></div>
-                    <div class="big-card-block"><i class="fa-solid fa-chart-line"></i><h3>High-Volume Scaling</h3><p>Engineered to route hundreds of trade matrix records cleanly simultaneously without lag spikes.</p></div>
-                    <div class="big-card-block"><i class="fa-solid fa-headset"></i><h3>Priority Desk Paths</h3><p>VIP ticket corridors open immediately for verified operators processing large premium values.</p></div>
+                    <div class="big-card-block"><i class="fa-solid fa-chart-line"></i><h3>High-Volume Scaling</h3><p>Engineered to route hundreds of trade matrix records cleanly simultaneously without lag.</p></div>
+                    <div class="big-card-block"><i class="fa-solid fa-headset"></i><h3>Priority Desk Paths</h3><p>VIP ticket corridors open immediately for verified operators processing large assets.</p></div>
                 </div>
             </div>
         </div>
 
+        <!-- TEAM EXPANDED PRESENTATION TAB -->
         <div id="slide-team" class="page-slide">
             <div class="presentation-view-box">
                 <div class="presentation-header">
                     <h2><i class="fa-solid fa-user-shield text-blue"></i> Administrative Registry</h2>
                     <span class="page-badge">Section 03 // Personnel Logs</span>
                 </div>
-                <div class="presentation-body">
-                    <p>Only verified system operator credentials listed below possess authorization clear paths to manage middleman tickets or validate transactions within this database network.</p>
-                </div>
                 <div class="presentation-grid-3x">
-                    <div class="big-card-block" style="border-top: 3px solid #c084fc;"><i class="fa-solid fa-crown" style="color:#c084fc;"></i><h3>@wrage4x1</h3><p>Network Founder & Master Administrator. Final compliance validator for high-value asset queues.</p></div>
-                    <div class="big-card-block" style="border-top: 3px solid #eab308;"><i class="fa-solid fa-star" style="color:#eab308;"></i><h3>@prashant6700</h3><p>Senior Administrator. Supervisor for standard verification queues and operational conflict resolution systems.</p></div>
-                    <div class="big-card-block" style="border-top: 3px solid #3b82f6;"><i class="fa-solid fa-shield-halved" style="color:#3b82f6;"></i><h3>@6bmp</h3><p>Verification Specialist. Operates daily credential sweeps and confirms structural safety checks.</p></div>
+                    <div class="big-card-block" style="border-top: 3px solid #c084fc;"><i class="fa-solid fa-crown" style="color:#c084fc;"></i><h3>@wrage4x1</h3><p>Network Founder. Final compliance validator for high-value asset queues.</p></div>
+                    <div class="big-card-block" style="border-top: 3px solid #eab308;"><i class="fa-solid fa-star" style="color:#eab308;"></i><h3>@prashant6700</h3><p>Senior Administrator. Supervisor for standard verification queues.</p></div>
+                    <div class="big-card-block" style="border-top: 3px solid #3b82f6;"><i class="fa-solid fa-shield-halved" style="color:#3b82f6;"></i><h3>@6bmp</h3><p>Verification Specialist. Operates daily credential sweeps.</p></div>
                 </div>
             </div>
         </div>
 
+        <!-- GIVEAWAYS EXPANDED PRESENTATION TAB -->
         <div id="slide-giveaways" class="page-slide">
             <div class="presentation-view-box">
                 <div class="presentation-header">
                     <h2><i class="fa-solid fa-gift text-blue"></i> Active Community Giveaways</h2>
                     <span class="page-badge">Section 04 // Rewards Allocation</span>
                 </div>
-                <p class="panel-text" style="margin-bottom: 25px;">We distribute items and account keys to active members to reward long-term community participation. Join our main discord desk channel to register your entrance parameters into active rolls!</p>
                 <div class="big-card-block" style="text-align: center; background: rgba(59, 130, 246, 0.05); border: 1px dashed #3b82f6;">
-                    <i class="fa-solid fa-gift" style="font-size: 3rem; color: #3b82f6;"></i>
+                    <i class="fa-solid fa-gift" style="font-size: 3rem; color: #3b82f6; margin: 0 auto 15px auto;"></i>
                     <h3 style="font-size: 1.4rem;">Weekly Premium Key Pool Rolling</h3>
                     <p class="panel-text" style="margin-bottom: 15px;">Requirement parameters: Active trade log or Level 5 Discord participation role matrix clear.</p>
                     <a href="https://discord.gg/xjeHqgyZH" target="_blank" class="btn-primary">Claim Entry Ticket</a>
@@ -359,34 +217,30 @@
             </div>
         </div>
 
+        <!-- REVIEWS EXPANDED PRESENTATION TAB -->
         <div id="slide-reviews" class="page-slide">
             <div class="presentation-view-box">
                 <div class="presentation-header">
                     <h2><i class="fa-solid fa-star text-blue"></i> Transaction Feedback Records</h2>
                     <span class="page-badge">Section 05 // Open Reviews Ledger</span>
                 </div>
-                <p class="panel-text" style="margin-bottom: 25px;">Verified deal logs collected straight from our platform transaction outputs. Transparency remains absolute.</p>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div class="review-feed-item" style="padding: 25px;"><div class="review-feed-header"><strong style="font-size: 1.1rem; color: #fff;">AlphaX</strong><span class="review-feed-stars">⭐⭐⭐⭐⭐</span></div><p class="review-feed-text" style="font-size: 1rem; margin-top: 10px;">"Incredibly efficient trading infrastructure. Handled a high-value account transfer through their ticket desk. Safe middleman and highly helpful crew members."</p></div>
-                    <div class="review-feed-item" style="padding: 25px;"><div class="review-feed-header"><strong style="font-size: 1.1rem; color: #fff;">ZoroX</strong><span class="review-feed-stars">⭐⭐⭐⭐⭐</span></div><p class="review-feed-text" style="font-size: 1rem; margin-top: 10px;">"The transaction took less than four minutes total. Absolute peace of mind when moving valuable profiles across countries."</p></div>
+                    <div class="review-feed-item" style="padding: 25px;"><div class="review-feed-header"><strong>AlphaX</strong><span class="review-feed-stars">⭐⭐⭐⭐⭐</span></div><p class="review-feed-text" style="font-size: 1rem; margin-top: 10px;">"Incredibly efficient trading infrastructure. Handled a high-value account transfer through their ticket desk."</p></div>
+                    <div class="review-feed-item" style="padding: 25px;"><div class="review-feed-header"><strong>ZoroX</strong><span class="review-feed-stars">⭐⭐⭐⭐⭐</span></div><p class="review-feed-text" style="font-size: 1rem; margin-top: 10px;">"The transaction took less than four minutes total. Absolute peace of mind."</p></div>
                 </div>
             </div>
         </div>
 
     </main>
 
-    <footer>
-        <p>&copy; 2026 Trusted Middleman Network. All Rights Reserved.</p>
-        <p>Operational Verification Integrity Engine Active.</p>
-    </footer>
-
+    <!-- FLOATING EXCLUSIVE SECURITY OPERATOR LOGIN OVERLAY (NO SIGNUP GATEWAY) -->
     <div id="login-modal" class="login-modal-overlay">
         <div class="login-card-container">
             <button onclick="closeLoginModal()" class="close-modal-cross"><i class="fa-solid fa-xmark"></i></button>
             <div class="login-card-header">
                 <i class="fa-solid fa-user-shield"></i>
                 <h3>Operator Check-In</h3>
-                <p>Provide verified administrator system credentials</p>
+                <p>Provide verified administrator credentials</p>
             </div>
             
             <form onsubmit="handleSystemLogin(event)">
@@ -403,65 +257,13 @@
         </div>
     </div>
 
+    <!-- SITE FRAMEWORK FOOTER BANNER -->
+    <footer>
+        <p>&copy; 2026 Trusted Middleman Network. All Rights Reserved.</p>
+        <p>Operational Verification Integrity Engine Active.</p>
+    </footer>
 
-    <script>
-        // Tab switching logic Engine
-        function switchTab(targetSlide) {
-            // Hide all slides
-            const slides = document.querySelectorAll('.page-slide');
-            slides.forEach(slide => slide.classList.remove('active'));
-
-            // Deactivate all nav buttons
-            const navButtons = document.querySelectorAll('.nav-btn');
-            navButtons.forEach(btn => btn.classList.remove('active'));
-
-            // Activate specific selected target parameters
-            const target = document.getElementById('slide-' + targetSlide);
-            if(target) target.classList.add('active');
-
-            const activeNav = document.getElementById('nav-' + targetSlide);
-            if(activeNav) activeNav.classList.add('active');
-            
-            // Scroll safely back to view start boundary point
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        // Modal visibility triggers
-        function openLoginModal() {
-            document.getElementById("login-modal").style.display = "flex";
-        }
-
-        function closeLoginModal() {
-            document.getElementById("login-modal").style.display = "none";
-        }
-
-        // Exclusive Admin Auth Rule validation engine
-        function handleSystemLogin(e) {
-            e.preventDefault();
-            
-            const enteredUser = document.getElementById("login-user-input").value.trim();
-            const enteredPass = document.getElementById("login-pass-input").value;
-
-            // Strict Validation Parameters Check
-            if (enteredUser === "@prashant" && enteredPass === "12345678") {
-                // Hide Modal
-                closeLoginModal();
-                
-                // Mount Admin Interface Controls directly into active viewport layout structure
-                document.getElementById("private-admin-panel").style.display = "block";
-                
-                // Swap Navigation Authentication Actions Button Area elements to display state
-                document.getElementById("auth-action-area").innerHTML = `
-                    <span class="user-pill" style="background: rgba(234, 179, 8, 0.1); border: 1px solid #eab308; color: #eab308; padding: 8px 14px; font-weight: bold; font-size: 0.85rem; border-radius: 6px;">
-                        <i class="fa-solid fa-crown"></i> Admin Account Active
-                    </span>
-                `;
-                
-                alert("Authorization confirmed. Operator Dashboard mounted successfully.");
-            } else {
-                alert("Security Error: Invalid credentials or unknown administrator role.");
-            }
-        }
-    </script>
+    <!-- Include Script Module -->
+    <script src="script.js"></script>
 </body>
 </html>
