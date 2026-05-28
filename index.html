@@ -40,6 +40,9 @@
         .badge-footer span { margin: 0 10px; }
         .badge-footer i { color: #3b82f6; margin-right: 4px; }
 
+        /* URL ERROR BANNER PANEL */
+        #url-error-banner { display: none; background: #ef4444; color: white; padding: 15px; text-align: center; font-weight: bold; font-size: 0.95rem; border-radius: 8px; margin-bottom: 20px; width: 100%; max-width: 450px; }
+
         /* ==========================================================================
            MAIN APPARATUS DASHBOARD INTERFACE STYLES
            ========================================================================== */
@@ -172,6 +175,8 @@
         <div class="auth-logo">
             <i class="fa-solid fa-shield-halved"></i> G2G MARKETPLACE
         </div>
+
+        <div id="url-error-banner">Error: Paste your Firebase URL inside index.html on line 273!</div>
 
         <div class="auth-box">
             <div id="signup-form-container">
@@ -467,15 +472,32 @@
 
 
     <script>
+        // PASTE YOUR FIREBASE URL IN THE STRING VARIABLE BELOW 👇
         const firebaseDatabaseURL = "https://g2g1-31e7d-default-rtdb.firebaseio.com";
+        
         let currentUser = localStorage.getItem("activeSessionUser");
         let matrixIntervalId = null;
 
         window.addEventListener("DOMContentLoaded", () => {
+            checkFirebaseConfiguration();
             evaluateSessionStatus();
         });
 
+        function checkFirebaseConfiguration() {
+            const banner = document.getElementById("url-error-banner");
+            if (!firebaseDatabaseURL || firebaseDatabaseURL.includes("YOUR_FIREBASE_URL") || firebaseDatabaseURL.trim() === "") {
+                banner.style.display = "block";
+            } else {
+                banner.style.display = "none";
+            }
+        }
+
+        function isConfigInvalid() {
+            return (!firebaseDatabaseURL || firebaseDatabaseURL.includes("YOUR_FIREBASE_URL") || firebaseDatabaseURL.trim() === "");
+        }
+
         function evaluateSessionStatus() {
+            if (isConfigInvalid()) return;
             currentUser = localStorage.getItem("activeSessionUser");
             const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
@@ -497,7 +519,6 @@
 
                 loadReviewsFromStorage();
                 
-                // Trigger Special Matrix Animation if logged in user is imusama
                 if(currentUser.toLowerCase() === "imusama") {
                     startImusamaMatrixEffect();
                 } else {
@@ -515,9 +536,10 @@
             document.getElementById("login-form-container").style.display = showSignUp ? "none" : "block";
         }
 
-        // HANDSHAKE SUBMISSIONS: REGISTER & SAVE PASSWORD ON CLOUD DIRECTLY
         function handleSignUp(e) {
             e.preventDefault();
+            if (isConfigInvalid()) { alert("Please configure your Firebase URL first!"); return; }
+
             const user = document.getElementById("signup-username").value.trim();
             const email = document.getElementById("signup-email").value.trim();
             const pass = document.getElementById("signup-password").value;
@@ -529,11 +551,11 @@
                 return;
             }
 
-            // Strictly checks availability across all backend database records
+            // Fixed logic to ensure we don't accidentally intercept string-based system messages
             fetch(`${firebaseDatabaseURL}/users/${user}.json`)
                 .then(res => res.json())
                 .then(existingUser => {
-                    if (existingUser) {
+                    if (existingUser && typeof existingUser === 'object' && existingUser.password) {
                         alert("Registration Blocked: Username is already taken.");
                         return;
                     }
@@ -542,7 +564,7 @@
                         username: user,
                         email: email,
                         discord: discordHandle || "Not Linked",
-                        password: pass // Saved globally to enable multi-device synchronization
+                        password: pass
                     };
 
                     return fetch(`${firebaseDatabaseURL}/users/${user}.json`, {
@@ -560,17 +582,17 @@
                 .catch(err => alert("Cloud registration failure: " + err));
         }
 
-        // HANDSHAKE SUBMISSIONS: MULTI-DEVICE VALIDATION
         function handleLogIn(e) {
             e.preventDefault();
+            if (isConfigInvalid()) { alert("Please configure your Firebase URL first!"); return; }
+
             const user = document.getElementById("login-username").value.trim();
             const pass = document.getElementById("login-password").value;
 
-            // Dynamically pulled down directly from Firebase cluster to verify password on any browser/device
             fetch(`${firebaseDatabaseURL}/users/${user}.json`)
                 .then(res => res.json())
                 .then(globalUserData => {
-                    if (globalUserData && globalUserData.password === pass) {
+                    if (globalUserData && typeof globalUserData === 'object' && globalUserData.password === pass) {
                         localStorage.setItem("isLoggedIn", "true");
                         localStorage.setItem("activeSessionUser", user);
                         alert("Handshake complete. Access granted!");
@@ -601,34 +623,36 @@
         }
 
         function loadMembersRegistry() {
+            if (isConfigInvalid()) return;
             const membersGrid = document.getElementById("live-members-grid");
             fetch(`${firebaseDatabaseURL}/users.json`)
                 .then(res => res.json())
                 .then(users => {
                     let cardHTML = "";
-                    if (!users) {
+                    if (!users || typeof users !== 'object') {
                         membersGrid.innerHTML = `<p style="color:#64748b;">No registered operators found globally.</p>`;
                         return;
                     }
 
                     Object.keys(users).forEach(username => {
                         let uData = users[username];
-                        let isMeBadge = (username === currentUser) ? `<span class="me-pill">You</span>` : "";
-
-                        cardHTML += `
-                            <div class="member-chip-card">
-                                <div class="m-chip-header">
-                                    <span class="m-name"><i class="fa-solid fa-circle-user"></i> ${username}</span>
-                                    ${isMeBadge}
+                        if (uData && typeof uData === 'object' && uData.email) {
+                            let isMeBadge = (username === currentUser) ? `<span class="me-pill">You</span>` : "";
+                            cardHTML += `
+                                <div class="member-chip-card">
+                                    <div class="m-chip-header">
+                                        <span class="m-name"><i class="fa-solid fa-circle-user"></i> ${username}</span>
+                                        ${isMeBadge}
+                                    </div>
+                                    <div class="m-details">
+                                        <p><i class="fa-solid fa-envelope"></i> ${uData.email || 'Hidden'}</p>
+                                        <p><i class="fa-brands fa-discord"></i> Discord: <span>${uData.discord || 'None'}</span></p>
+                                    </div>
                                 </div>
-                                <div class="m-details">
-                                    <p><i class="fa-solid fa-envelope"></i> ${uData.email || 'Hidden'}</p>
-                                    <p><i class="fa-brands fa-discord"></i> Discord: <span>${uData.discord || 'None'}</span></p>
-                                </div>
-                            </div>
-                        `;
+                            `;
+                        }
                     });
-                    membersGrid.innerHTML = cardHTML;
+                    membersGrid.innerHTML = cardHTML || `<p style="color:#64748b;">No registered operators found globally.</p>`;
                 })
                 .catch(err => console.error("Could not sync registration matrix:", err));
         }
@@ -683,9 +707,6 @@
             loadReviewsFromStorage();
         }
 
-        // ==========================================================================
-        // IMUSAMA CUSTOM MATRIX DROP LAYER CODES
-        // ==========================================================================
         function startImusamaMatrixEffect() {
             const canvas = document.getElementById("imusama-canvas-matrix");
             if(!canvas) return;
@@ -715,7 +736,7 @@
                 ctx.fillStyle = "rgba(2, 6, 23, 0.05)";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                ctx.fillStyle = "#3b82f6"; // Blue custom theme match colors
+                ctx.fillStyle = "#3b82f6";
                 ctx.font = fontSize + "px monospace";
 
                 for (let i = 0; i < rainDrops.length; i++) {
