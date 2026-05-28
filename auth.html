@@ -1,1 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G2G Marketplace - Access Terminal</title>
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #020617; color: #e2e8f0; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .auth-container { background: linear-gradient(160deg, #0b1329 0%, #040914 100%); border: 1px solid #1e293b; border-radius: 16px; width: 100%; max-width: 450px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative; }
+        .auth-container::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #2563eb, #3b82f6, transparent); border-radius: 16px 16px 0 0; }
+        .auth-header { text-align: center; margin-bottom: 30px; }
+        .auth-header i { font-size: 3rem; color: #3b82f6; margin-bottom: 10px; }
+        .auth-header h2 { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
+        .form-box { display: none; }
+        .form-box.active { display: block; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .input-wrapper { position: relative; }
+        .input-wrapper i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #475569; }
+        .input-wrapper input { width: 100%; background: #020617; border: 1px solid #1e293b; border-radius: 8px; color: #fff; padding: 12px 12px 12px 40px; font-size: 0.95rem; transition: border-color 0.3s; }
+        .input-wrapper input:focus { outline: none; border-color: #3b82f6; }
+        .btn-submit { width: 100%; background: #2563eb; color: #fff; border: none; padding: 14px; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: background 0.3s, box-shadow 0.3s; }
+        .btn-submit:hover { background: #1d4ed8; box-shadow: 0 0 15px rgba(37, 99, 235, 0.4); }
+        .switch-prompt { text-align: center; margin-top: 25px; font-size: 0.9rem; color: #64748b; }
+        .switch-prompt span { color: #3b82f6; cursor: pointer; font-weight: 600; text-decoration: underline; }
+    </style>
+</head>
+<body>
 
+    <div class="auth-container">
+        <div class="auth-header">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h2>G2G SECURE GATEWAY</h2>
+        </div>
+
+        <!-- LOGIN PANEL VIEW -->
+        <div id="login-box" class="form-box active">
+            <form onsubmit="handleLogIn(event)">
+                <div class="input-group">
+                    <label>Username Address</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="login-username" required placeholder="Enter username">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Security Keyphrase</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="login-password" required placeholder="Enter password">
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fa-solid fa-right-to-bracket"></i> Authenticate Session</button>
+            </form>
+            <div class="switch-prompt">
+                New network operator? <span onclick="toggleForm(true)">Create Registry Record</span>
+            </div>
+        </div>
+
+        <!-- SIGN UP PANEL VIEW -->
+        <div id="signup-box" class="form-box">
+            <form onsubmit="handleSignUp(event)">
+                <div class="input-group">
+                    <label>Desired Username</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <input type="text" id="signup-username" required placeholder="Pick unique username">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Secure Email Route</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="signup-email" required placeholder="name@example.com">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Discord Handle</label>
+                    <div class="input-wrapper">
+                        <i class="fa-brands fa-discord"></i>
+                        <input type="text" id="signup-discord" placeholder="username#0000 or global name">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Secret Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-key"></i>
+                        <input type="password" id="signup-password" required placeholder="Create strong password">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Confirm Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <input type="password" id="signup-confirm" required placeholder="Repeat security password">
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fa-solid fa-user-check"></i> Deploy Registration</button>
+            </form>
+            <div class="switch-prompt">
+                Already registered? <span onclick="toggleForm(false)">Return to Login</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm(showSignUp) {
+            if (showSignUp) {
+                document.getElementById("login-box").classList.remove("active");
+                document.getElementById("signup-box").classList.add("active");
+            } else {
+                document.getElementById("signup-box").classList.remove("active");
+                document.getElementById("login-box").classList.add("active");
+            }
+        }
+
+        function handleSignUp(e) {
+            e.preventDefault();
+            const user = document.getElementById("signup-username").value.trim();
+            const email = document.getElementById("signup-email").value.trim();
+            const pass = document.getElementById("signup-password").value;
+            const confirmPass = document.getElementById("signup-confirm").value;
+            const discordHandle = document.getElementById("signup-discord").value.trim();
+
+            if (pass !== confirmPass) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            localStorage.setItem("username_" + user, user);
+            localStorage.setItem("password_" + user, pass);
+            localStorage.setItem("email_" + user, email);
+            localStorage.setItem("discord_" + user, discordHandle || "Not Linked");
+            
+            alert("Account created successfully! Please log in.");
+            toggleForm(false); 
+            document.getElementById("login-username").value = user;
+        }
+
+        function handleLogIn(e) {
+            e.preventDefault();
+            const user = document.getElementById("login-username").value.trim();
+            const pass = document.getElementById("login-password").value;
+
+            const storedUser = localStorage.getItem("username_" + user);
+            const storedPass = localStorage.getItem("password_" + user);
+
+            if (storedUser === user && storedPass === pass) {
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("activeSessionUser", user);
+                window.location.href = "index.html"; 
+            } else {
+                alert("Invalid username or password!");
+            }
+        }
+    </script>
+</body>
+</html>
