@@ -1,1 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G2G Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // FORCED SECURITY LOGIN GUARD
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            window.location.replace("auth.html");
+        }
+    </script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-shield-halved"></i> G2G MARKETPLACE
+        </div>
+        <nav>
+            <button onclick="switchTab('home')" id="nav-home" class="nav-btn active">Home</button>
+            <button onclick="switchTab('about')" id="nav-about" class="nav-btn">About</button>
+            <button onclick="switchTab('features')" id="nav-features" class="nav-btn">Features</button>
+            <button onclick="switchTab('chat')" id="nav-chat" class="nav-btn"><i class="fa-solid fa-comments"></i> Global Chat</button>
+            <button onclick="switchTab('team')" id="nav-team" class="nav-btn">Verified Team</button>
+            <button onclick="switchTab('reviews')" id="nav-reviews" class="nav-btn">Reviews</button>
+            <button onclick="switchTab('profile')" id="nav-profile" class="nav-btn"><i class="fa-solid fa-circle-user"></i> Profile</button>
+        </nav>
+        <div class="nav-auth-buttons">
+            <span id="nav-username-display" class="user-pill"><i class="fa-solid fa-user-tag"></i> Loading...</span>
+            <button onclick="logoutUser()" class="btn btn-outline" style="cursor:pointer;"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div id="slide-home" class="page-slide active">
+            <div class="layout-grid-home">
+                <section class="hero">
+                    <div class="hero-text">
+                        <h1>G2G <br><span class="highlight">MARKETPLACE</span></h1>
+                        <p class="subtitle">Safe Trading. Trusted Middleman. Fast Support.</p>
+                        <p class="description">We provide a secure and professional environment for all your trading needs. Your safety is our priority.</p>
+                        <div class="hero-buttons">
+                            <a href="https://discord.gg/xjeHqgyZH" target="_blank" class="btn btn-discord"><i class="fa-brands fa-discord"></i> JOIN OUR DISCORD</a>
+                            <button onclick="switchTab('about')" class="btn btn-outline" style="cursor:pointer;">LEARN MORE</button>
+                        </div>
+                    </div>
+                    <div class="hero-graphic">
+                        <div class="shield-logo">
+                            <i class="fa-solid fa-handshake"></i>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="stats-bar">
+                <div class="stat-item"><i class="fa-solid fa-users"></i> <div><strong>5K+</strong><p>Trusted Members</p></div></div>
+                <div class="stat-item"><i class="fa-solid fa-circle-check"></i> <div><strong>2K+</strong><p>Successful Deals</p></div></div>
+                <div class="stat-item"><i class="fa-solid fa-headset"></i> <div><strong>24/7</strong><p>Active Support</p></div></div>
+                <div class="stat-item"><i class="fa-solid fa-lock"></i> <div><strong>100%</strong><p>Safe & Secure</p></div></div>
+            </div>
+        </div>
+
+        <div id="slide-about" class="page-slide">
+            <div class="slide-card-presentation">
+                <div class="presentation-header">
+                    <h2><i class="fa-solid fa-circle-info text-blue"></i> Who We Are & What We Do</h2>
+                    <span class="page-badge">Page 01 // Operations Ledger</span>
+                </div>
+                <hr class="divider">
+                <div class="about-extended-layout">
+                    <div class="about-block">
+                        <div class="about-icon-pill"><i class="fa-solid fa-building-shield"></i></div>
+                        <h3>Who Are We?</h3>
+                        <p>We are an enterprise-grade digital asset escrow community designed to protect retail buyers and high-volume sellers. Founded by seasoned trade validators, G2G Marketplace acts as a legal and mechanical buffer between trading counter-parties across global server networks.</p>
+                    </div>
+
+                    <div class="about-block">
+                        <div class="about-icon-pill"><i class="fa-solid fa-right-left"></i></div>
+                        <h3>What We Do In Trading</h3>
+                        <p>When two individuals want to exchange items, cash, keys, or profile accounts, they open a secure desk ticket with us. The seller hands the asset securely to our certified middlemen. We run verification sweeps on the asset. Once the buyer completes their external financial transfer to the seller, we immediately override properties and release the trade parameters. No exit scams. No fake invoices. Absolute safety.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-features" class="page-slide">
+            <div class="slide-card-presentation">
+                <div class="presentation-header">
+                    <h2><i class="fa-solid fa-layer-group text-blue"></i> Platform Infrastructure</h2>
+                    <span class="page-badge">Page 02 // Core Architecture</span>
+                </div>
+                <hr class="divider">
+                
+                <div class="features-grid-multipage">
+                    <div class="feature-box-premium">
+                        <i class="fa-solid fa-shield-halved f-icon"></i>
+                        <h4>Trusted Middleman Services</h4>
+                        <p>Audited step-by-step middleman infrastructure to shield your funds and assets throughout commercial transactions.</p>
+                    </div>
+                    <div class="feature-box-premium">
+                        <i class="fa-solid fa-headset f-icon"></i>
+                        <h4>Fast Ticket Support</h4>
+                        <p>Our average real-time ticketing workflow responds under 5 minutes to mitigate delivery errors or handle user conflicts instantly.</p>
+                    </div>
+                    <div class="feature-box-premium">
+                        <i class="fa-solid fa-lock f-icon"></i>
+                        <h4>Safe Trading Channels</h4>
+                        <p>End-to-end access isolation protocols so sensitive keys and delivery logs are encrypted from public scraping tools.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-chat" class="page-slide">
+            <div class="slide-card-presentation">
+                <div class="presentation-header">
+                    <h2><i class="fa-solid fa-comments text-blue"></i> Platform Global Chatroom</h2>
+                    <span class="page-badge">Live Communication Deck</span>
+                </div>
+                <hr class="divider">
+                
+                <div class="chat-interface-layout">
+                    <div id="chat-messages-log" class="chat-box-display">
+                        </div>
+                    
+                    <form id="chat-input-panel" onsubmit="submitChatMessage(event)" class="chat-form-row">
+                        <input type="text" id="chat-message-text" placeholder="Type a message to the marketplace channel..." autocomplete="off" required>
+                        <button type="submit" class="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-team" class="page-slide">
+            <div class="slide-card-presentation">
+                <div class="presentation-header">
+                    <h2><i class="fa-solid fa-user-shield text-blue"></i> Verified Operators</h2>
+                    <span class="page-badge">Page 03 // Administrative Registry</span>
+                </div>
+                <hr class="divider">
+                
+                <div class="team-grid-premium">
+                    <div class="team-card-p">
+                        <div class="t-avatar"><i class="fa-solid fa-crown rank-owner"></i></div>
+                        <h4>@wrage4x1</h4>
+                        <span class="t-role role-owner">Marketplace Owner</span>
+                        <p>Primary escrow administrator and compliance strategist. Authorized to sign high-tier transaction clearances.</p>
+                    </div>
+                    <div class="team-card-p">
+                        <div class="t-avatar"><i class="fa-solid fa-star rank-admin"></i></div>
+                        <h4>@prashant6700</h4>
+                        <span class="t-role role-admin">Senior Administrator</span>
+                        <p>Head of operational disputes and validation logic systems. Supervises standard ticketing queues.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-reviews" class="page-slide">
+            <div class="slide-card-presentation">
+                <div class="presentation-header">
+                    <h2><i class="fa-solid fa-star text-blue"></i> Ledger & Live Feedback Loop</h2>
+                    <span class="page-badge">Page 04 // Open Reviews System</span>
+                </div>
+                <hr class="divider">
+                
+                <div class="review-submission-box">
+                    <h3>Submit Your Public Record Review</h3>
+                    <form id="public-review-form" onsubmit="submitLiveReview(event)">
+                        <div class="review-form-row">
+                            <div class="sub-group">
+                                <label>Star Rating</label>
+                                <select id="review-stars-select" class="premium-select">
+                                    <option value="⭐⭐⭐⭐⭐">5 Stars - Flawless Service</option>
+                                    <option value="⭐⭐⭐⭐">4 Stars - Highly Secure</option>
+                                    <option value="⭐⭐⭐">3 Stars - Average Speed</option>
+                                    <option value="⭐⭐">2 Stars - Sluggish Pipeline</option>
+                                    <option value="⭐">1 Star - Operational Issue</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="sub-group" style="margin-top: 15px;">
+                            <label>Your Review Statement</label>
+                            <textarea id="review-text-input" class="premium-textarea" placeholder="Type out your transaction feedback here... Everyone on the web will see this review instantly." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-discord" style="margin-top: 15px; border:none; cursor:pointer;"><i class="fa-solid fa-paper-plane"></i> Publish Review To Public Grid</button>
+                    </form>
+                </div>
+
+                <div id="dynamic-reviews-grid" class="reviews-grid-premium">
+                    </div>
+            </div>
+        </div>
+
+        <div id="slide-profile" class="page-slide">
+            <div class="slide-card-presentation">
+                <div class="presentation-header">
+                    <h2><i class="fa-solid fa-id-card text-blue"></i> Your Secure Account Profile</h2>
+                    <span class="page-badge">User Matrix Terminal</span>
+                </div>
+                <hr class="divider">
+                <div class="profile-card-layout">
+                    <div class="profile-avatar-big">
+                        <i class="fa-solid fa-user-gear"></i>
+                    </div>
+                    <div class="profile-details-list">
+                        <div class="p-row"><strong>Username Access ID:</strong> <span id="profile-username-val" class="highlight">Unverified</span></div>
+                        <div class="p-row"><strong>Registered Email Hash:</strong> <span id="profile-email-val">Unverified</span></div>
+                        <div class="p-row"><strong>Associated Discord Handle:</strong> <span id="profile-discord-val">None Provided</span></div>
+                        <div class="p-row"><strong>Account Security Status:</strong> <span class="sec-status-pill"><i class="fa-solid fa-shield-check"></i> Activated & Guarded</span></div>
+                    </div>
+                </div>
+
+                <div class="members-directory-section" style="margin-top: 40px;">
+                    <div class="presentation-header">
+                        <h2><i class="fa-solid fa-users text-blue"></i> Registered Marketplace Members</h2>
+                        <span class="page-badge">Live Member Registry</span>
+                    </div>
+                    <hr class="divider" style="margin-bottom: 20px;">
+                    
+                    <div id="live-members-grid" class="members-grid-layout">
+                        </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 G2G Marketplace. All Rights Reserved.</p>
+        <p>Dynamic Core Storage Framework Connected.</p>
+    </footer>
+
+    <script>
+        const currentUser = localStorage.getItem("activeSessionUser");
+        
+        if(currentUser) {
+            document.getElementById("nav-username-display").innerHTML = `<i class="fa-solid fa-user-astronaut"></i> ${currentUser}`;
+            document.getElementById("profile-username-val").innerText = currentUser;
+            
+            const storedEmail = localStorage.getItem("email_" + currentUser) || "hidden_user@g2g.marketplace";
+            const storedDiscord = localStorage.getItem("discord_" + currentUser) || "Not Linked In Settings";
+            
+            document.getElementById("profile-email-val").innerText = storedEmail;
+            document.getElementById("profile-discord-val").innerText = storedDiscord;
+        }
+
+        // Live Chat Checker interval variable
+        let chatRefreshInterval;
+
+        function switchTab(targetSlide) {
+            const slides = document.querySelectorAll('.page-slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => btn.classList.remove('active'));
+
+            const target = document.getElementById('slide-' + targetSlide);
+            if(target) target.classList.add('active');
+
+            const activeNav = document.getElementById('nav-' + targetSlide);
+            if(activeNav) activeNav.classList.add('active');
+            
+            // Trigger specific methods depending on tab activated
+            if(targetSlide === 'profile') {
+                loadMembersRegistry();
+            }
+            
+            // Handle chat polling activation state
+            if(targetSlide === 'chat') {
+                loadChatMessages();
+                // Check for new chat messages every 1.5 seconds automatically
+                chatRefreshInterval = setInterval(loadChatMessages, 1500);
+            } else {
+                clearInterval(chatRefreshInterval);
+            }
+        }
+
+        // --- GLOBAL LIVE CHAT SYSTEM ENGINE ---
+        function loadChatMessages() {
+            const chatLog = document.getElementById("chat-messages-log");
+            let chatData = JSON.parse(localStorage.getItem("globalChatLogsArray")) || [];
+            let chatHTML = "";
+
+            if(chatData.length === 0) {
+                chatLog.innerHTML = `<div style="color:#475569; text-align:center; padding-top:40px;">No messages sent yet. Start the conversation!</div>`;
+                return;
+            }
+
+            chatData.forEach(msg => {
+                // Style if the message belongs to the current logged-in identity
+                let isMeClass = (msg.sender === currentUser) ? "msg-me" : "msg-other";
+                
+                chatHTML += `
+                    <div class="chat-message-wrapper ${isMeClass}">
+                        <div class="chat-msg-bubble">
+                            <span class="chat-msg-author">${msg.sender}</span>
+                            <p class="chat-msg-text">${msg.text}</p>
+                            <span class="chat-msg-time">${msg.time}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Keep the previous scroll position tracker unless at the bottom
+            let shouldScroll = (chatLog.scrollTop + chatLog.clientHeight >= chatLog.scrollHeight - 50);
+            
+            chatLog.innerHTML = chatHTML;
+            
+            if(shouldScroll || chatLog.getAttribute("data-first-load") !== "false") {
+                chatLog.scrollTop = chatLog.scrollHeight;
+                chatLog.setAttribute("data-first-load", "false");
+            }
+        }
+
+        function submitChatMessage(e) {
+            e.preventDefault();
+            const inputField = document.getElementById("chat-message-text");
+            const msgText = inputField.value.trim();
+
+            if(!msgText) return;
+
+            let chatData = JSON.parse(localStorage.getItem("globalChatLogsArray")) || [];
+            
+            // Parse a clean dynamic timestamp
+            let now = new Date();
+            let timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+            const newMsgPacket = {
+                sender: currentUser || "GuestTrader",
+                text: msgText,
+                time: timeString
+            };
+
+            chatData.push(newMsgPacket);
+            localStorage.setItem("globalChatLogsArray", JSON.stringify(chatData));
+            
+            inputField.value = "";
+            loadChatMessages();
+            
+            // Hard snap scroll view down to the latest text entry bubble
+            const chatLog = document.getElementById("chat-messages-log");
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+
+        // --- DYNAMIC REGISTERED MEMBERS DIRECTORY LOOP ---
+        function loadMembersRegistry() {
+            const membersGrid = document.getElementById("live-members-grid");
+            let cardHTML = "";
+            let uniqueUsersFound = [];
+
+            for (let i = 0; i < localStorage.length; i++) {
+                let currentKey = localStorage.key(i);
+                if (currentKey.startsWith("username_")) {
+                    let extractedName = localStorage.getItem(currentKey);
+                    if (!uniqueUsersFound.includes(extractedName)) {
+                        uniqueUsersFound.push(extractedName);
+                    }
+                }
+            }
+
+            uniqueUsersFound.forEach(username => {
+                let email = localStorage.getItem("email_" + username) || "No email stored";
+                let discord = localStorage.getItem("discord_" + username) || "Not Linked";
+                let isMeBadge = (username === currentUser) ? `<span class="me-pill">You</span>` : "";
+
+                cardHTML += `
+                    <div class="member-chip-card">
+                        <div class="m-chip-header">
+                            <span class="m-name"><i class="fa-solid fa-circle-user"></i> ${username}</span>
+                            ${isMeBadge}
+                        </div>
+                        <div class="m-details">
+                            <p><i class="fa-solid fa-envelope"></i> ${email}</p>
+                            <p><i class="fa-brands fa-discord"></i> Discord: <span>${discord}</span></p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            membersGrid.innerHTML = cardHTML || `<p style="color:#64748b;">No other registered operators.</p>`;
+        }
+
+        // --- PUBLIC COMMENT DATA ENGINE ---
+        function loadReviewsFromStorage() {
+            const reviewContainer = document.getElementById("dynamic-reviews-grid");
+            
+            let defaultHTML = `
+                <div class="review-box-p">
+                    <div class="r-top">
+                        <span class="r-user"><i class="fa-solid fa-circle-user"></i> AlphaX</span>
+                        <span class="r-stars">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p>"Incredibly efficient trading infrastructure. Handled a high-value account transfer through their ticket desk. Safe middleman and highly helpful crew members."</p>
+                    <span class="r-date"><i class="fa-solid fa-clock"></i> Verified Deal Done Successfully</span>
+                </div>
+            `;
+
+            let globalReviews = JSON.parse(localStorage.getItem("publicReviewsArray")) || [];
+            
+            globalReviews.forEach(rev => {
+                defaultHTML = `
+                    <div class="review-box-p custom-user-review">
+                        <div class="r-top">
+                            <span class="r-user" style="color: #3b82f6;"><i class="fa-solid fa-circle-user text-blue"></i> ${rev.author}</span>
+                            <span class="r-stars">${rev.stars}</span>
+                        </div>
+                        <p>"${rev.text}"</p>
+                        <span class="r-date"><i class="fa-solid fa-circle-nodes"></i> Live Public Contribution</span>
+                    </div>
+                ` + defaultHTML;
+            });
+
+            reviewContainer.innerHTML = defaultHTML;
+        }
+
+        function submitLiveReview(e) {
+            e.preventDefault();
+            const starsSelection = document.getElementById("review-stars-select").value;
+            const reviewTextContent = document.getElementById("review-text-input").value.trim();
+            
+            if(!reviewTextContent) return;
+
+            let globalReviews = JSON.parse(localStorage.getItem("publicReviewsArray")) || [];
+            
+            const newReviewPacket = {
+                author: currentUser || "AnonymousTrader",
+                stars: starsSelection,
+                text: reviewTextContent
+            };
+
+            globalReviews.push(newReviewPacket);
+            localStorage.setItem("publicReviewsArray", JSON.stringify(globalReviews));
+            
+            document.getElementById("review-text-input").value = "";
+            loadReviewsFromStorage();
+        }
+
+        // Run setup loop initializations
+        loadReviewsFromStorage();
+
+        // FIXED SECURITY LOGOUT LOGIC PIPELINE
+        function logoutUser() {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("activeSessionUser");
+            alert("Logging out securely...");
+            window.location.replace("auth.html");
+        }
+    </script>
+</body>
+</html>
 
