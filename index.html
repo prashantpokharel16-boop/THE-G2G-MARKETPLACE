@@ -49,12 +49,12 @@
         .hero-shield-wrapper { display: flex; justify-content: center; align-items: center; position: relative; }
         .shield-display-card { width: 260px; height: 280px; background: radial-gradient(circle, #1e3a8a 0%, #020617 100%); border: 3px solid #3b82f6; border-radius: 20px; display: flex; justify-content: center; align-items: center; font-size: 5rem; color: #3b82f6; box-shadow: 0 0 50px rgba(59, 130, 246, 0.3); }
 
-        /* COUNTER METRICS BAR */
-        .metrics-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; background: #0b1329; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 30px; }
-        .metric-item { display: flex; align-items: center; gap: 15px; }
-        .metric-item i { font-size: 1.8rem; color: #3b82f6; }
-        .metric-item h3 { font-size: 1.2rem; color: #fff; }
-        .metric-item p { font-size: 0.8rem; color: #64748b; }
+        <div class="metrics-bar">
+                <div class="metric-item"><i class="fa-solid fa-users"></i><div><h3>5K+</h3><p>Trusted Members</p></div></div>
+                <div class="metric-item"><i class="fa-solid fa-circle-check"></i><div><h3>2K+</h3><p>Successful Deals</p></div></div>
+                <div class="metric-item"><i class="fa-solid fa-headset"></i><div><h3>24/7</h3><p>Active Support</p></div></div>
+                <div class="metric-item"><i class="fa-solid fa-lock"></i><div><h3>100%</h3><p>Safe & Secure</p></div></div>
+            </div>
 
         /* MAIN CONTENT SPLIT LAYOUT */
         .main-split-layout { display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 25px; }
