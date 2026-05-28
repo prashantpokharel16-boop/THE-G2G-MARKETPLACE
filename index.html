@@ -529,7 +529,7 @@
                 return;
             }
 
-            // Fixed username availability check against backend database records
+            // Strictly checks availability across all backend database records
             fetch(`${firebaseDatabaseURL}/users/${user}.json`)
                 .then(res => res.json())
                 .then(existingUser => {
