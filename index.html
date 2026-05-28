@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G2G Marketplace</title>
     <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         // FIXED SECURITY LOGIN GUARD
@@ -16,7 +15,6 @@
 </head>
 <body>
 
-    <!-- NAVBAR AREA -->
     <header class="navbar">
         <div class="logo">
             <i class="fa-solid fa-shield-halved"></i> G2G MARKETPLACE
@@ -36,10 +34,8 @@
         </div>
     </header>
 
-    <!-- CONTENT PAGES CONTAINER -->
     <main class="container">
 
-        <!-- ================= HOME VIEW SLIDE ================= -->
         <div id="slide-home" class="page-slide active">
             <div class="layout-grid-home">
                 <section class="hero">
@@ -68,7 +64,6 @@
             </div>
         </div>
 
-        <!-- ================= ABOUT VIEW SLIDE ================= -->
         <div id="slide-about" class="page-slide">
             <div class="slide-card-presentation">
                 <div class="presentation-header">
@@ -92,7 +87,6 @@
             </div>
         </div>
 
-        <!-- ================= FEATURES VIEW SLIDE ================= -->
         <div id="slide-features" class="page-slide">
             <div class="slide-card-presentation">
                 <div class="presentation-header">
@@ -121,7 +115,6 @@
             </div>
         </div>
 
-        <!-- ================= GLOBAL CHAT SYSTEM SLIDE ================= -->
         <div id="slide-chat" class="page-slide">
             <div class="slide-card-presentation">
                 <div class="presentation-header">
@@ -143,7 +136,6 @@
             </div>
         </div>
 
-        <!-- ================= TEAM VIEW SLIDE ================= -->
         <div id="slide-team" class="page-slide">
             <div class="slide-card-presentation">
                 <div class="presentation-header">
@@ -169,7 +161,6 @@
             </div>
         </div>
 
-        <!-- ================= REVIEWS VIEW SLIDE ================= -->
         <div id="slide-reviews" class="page-slide">
             <div class="slide-card-presentation">
                 <div class="presentation-header">
@@ -202,12 +193,10 @@
                 </div>
 
                 <div id="dynamic-reviews-grid" class="reviews-grid-premium">
-                    <!-- Dynamic reviews load here -->
-                </div>
+                    </div>
             </div>
         </div>
 
-        <!-- ================= PROFILE & MEMBERS DIRECTORY SLIDE ================= -->
         <div id="slide-profile" class="page-slide">
             <div class="slide-card-presentation">
                 <div class="presentation-header">
@@ -244,25 +233,22 @@
 
     </main>
 
-    <!-- FOOTER ARCHITECTURE -->
     <footer>
         <p>&copy; 2026 G2G Marketplace. All Rights Reserved.</p>
         <p>Global Realtime Cloud Database Connected.</p>
     </footer>
 
-    <!-- INTERACTIVE CONTROL SCRIPT MATRIX -->
     <script>
         const currentUser = localStorage.getItem("activeSessionUser");
         
-        // --- CLOUD FIREBASE CONNECTIVITY RULES ---
-        // ⚠️ PASTE YOUR REALTIME DATABASE URL LINK RIGHT BELOW HERE (NO '/' AT THE END):
-        const firebaseDatabaseURL = "YOUR_FIREBASE_DATABASE_URL_HERE";
+        // --- EMBEDDED FIREBASE CORE LINK CONFIGURATION ---
+        const firebaseDatabaseURL = "https://g2g1-31e7d-default-rtdb.firebaseio.com";
 
         if(currentUser) {
             document.getElementById("nav-username-display").innerHTML = `<i class="fa-solid fa-user-astronaut"></i> ${currentUser}`;
             document.getElementById("profile-username-val").innerText = currentUser;
             
-            // Instantly pull personal profile specifics from cloud system
+            // Instantly pull personal profile data from Firebase cloud database
             fetch(`${firebaseDatabaseURL}/users/${currentUser}.json`)
                 .then(res => res.json())
                 .then(userData => {
@@ -297,11 +283,6 @@
 
         // --- GLOBAL LIVE CLOUD CHAT SYSTEM ENGINE ---
         function loadChatMessages() {
-            if (firebaseDatabaseURL.includes("YOUR_FIREBASE_DATABASE_URL_HERE")) {
-                document.getElementById("chat-messages-log").innerHTML = `<div style='color:#ef4444; text-align:center; padding-top:40px;'>Error: Paste your Firebase URL inside index.html on line 150!</div>`;
-                return;
-            }
-
             fetch(`${firebaseDatabaseURL}/chat.json`)
                 .then(response => response.json())
                 .then(data => {
@@ -336,7 +317,7 @@
                         chatLog.setAttribute("data-first-load", "false");
                     }
                 })
-                .catch(err => console.error("Cloud storage chat handshake error:", err));
+                .catch(err => console.error("Cloud storage chat loading error:", err));
         }
 
         function submitChatMessage(e) {
@@ -363,17 +344,15 @@
                 inputField.value = "";
                 loadChatMessages();
             })
-            .catch(err => alert("Cloud chat communication failed: " + err));
+            .catch(err => alert("Cloud chat transmission failure: " + err));
         }
 
-        // Sync systems every 2 seconds
+        // Auto reload chat feed logs every 2 seconds
         setInterval(loadChatMessages, 2000);
 
-        // --- GLOBAL REGISTERED MEMBERS DIRECTORY LOOP (PULLED FROM FIREBASE CLOUD) ---
+        // --- GLOBAL REGISTERED MEMBERS DIRECTORY LOOP ---
         function loadMembersRegistry() {
             const membersGrid = document.getElementById("live-members-grid");
-            if (firebaseDatabaseURL.includes("YOUR_FIREBASE_DATABASE_URL_HERE")) return;
-
             fetch(`${firebaseDatabaseURL}/users.json`)
                 .then(res => res.json())
                 .then(users => {
@@ -402,7 +381,7 @@
                     });
                     membersGrid.innerHTML = cardHTML;
                 })
-                .catch(err => console.error("Could not synch membership register:", err));
+                .catch(err => console.error("Could not sync registration matrix:", err));
         }
 
         // --- PUBLIC COMMENT DATA ENGINE ---
