@@ -17,32 +17,8 @@
         /* IMUSAMA BACKGROUND ANIMATION CANVAS LAYER */
         #imusama-canvas-matrix { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; display: none; opacity: 0.25; }
 
-        /* ==========================================================================
-           AUTHENTICATION VIEW PORTAL SKINS
-           ========================================================================== */
-        .auth-portal-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; background-color: #020617; }
-        .auth-logo { font-size: 1.5rem; font-weight: 800; color: #3b82f6; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .auth-box { width: 100%; max-width: 450px; background: linear-gradient(145deg, #0b1329, #050b18); border: 1px solid #1e293b; border-radius: 12px; padding: 35px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
-        .auth-box h2 { text-align: center; font-size: 2rem; letter-spacing: 1px; margin-bottom: 5px; text-transform: uppercase; color: #fff; }
-        .auth-box .subtitle { text-align: center; color: #64748b; font-size: 0.9rem; margin-bottom: 30px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 0.75rem; font-weight: 700; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .input-wrapper { position: relative; display: flex; align-items: center; }
-        .input-wrapper i { position: absolute; left: 15px; color: #475569; font-size: 0.95rem; }
-        .input-wrapper input { width: 100%; padding: 12px 15px 12px 45px; background-color: #020617; border: 1px solid #1e293b; border-radius: 8px; color: white; font-size: 0.95rem; transition: all 0.3s; }
-        .input-wrapper input:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
-        .checkbox-group { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #94a3b8; margin-bottom: 25px; }
-        .checkbox-group a { color: #3b82f6; text-decoration: none; }
-        .btn-submit { width: 100%; background: #2563eb; color: white; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: all 0.3s; text-transform: uppercase; }
-        .btn-submit:hover { background: #1d4ed8; box-shadow: 0 0 15px rgba(37, 99, 235, 0.5); }
-        .auth-footer { text-align: center; margin-top: 25px; font-size: 0.9rem; color: #94a3b8; }
-        .auth-footer button { background: none; border: none; color: #3b82f6; font-weight: 600; cursor: pointer; padding: 0 5px; text-decoration: underline; }
-        .badge-footer { margin-top: 25px; width: 100%; max-width: 450px; border: 1px solid #1e293b; border-radius: 8px; padding: 12px; text-align: center; font-size: 0.85rem; color: #64748b; background: #050b18; }
-        .badge-footer span { margin: 0 10px; }
-        .badge-footer i { color: #3b82f6; margin-right: 4px; }
-
         /* URL ERROR BANNER PANEL */
-        #url-error-banner { display: none; background: #ef4444; color: white; padding: 15px; text-align: center; font-weight: bold; font-size: 0.95rem; border-radius: 8px; margin-bottom: 20px; width: 100%; max-width: 450px; }
+        #url-error-banner { display: none; background: #ef4444; color: white; padding: 15px; text-align: center; font-weight: bold; font-size: 0.95rem; border-radius: 8px; margin: 20px auto 0 auto; width: 92%; max-width: 1100px; z-index: 1001; }
 
         /* ==========================================================================
            MAIN APPARATUS DASHBOARD INTERFACE STYLES
@@ -123,9 +99,9 @@
         .review-submission-box { background: rgba(2, 6, 23, 0.6); border: 1px solid #1e293b; border-radius: 12px; padding: 25px; margin-bottom: 35px; }
         .review-submission-box h3 { font-size: 1.1rem; margin-bottom: 15px; color: #fff; }
         .sub-group label { display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase; }
-        .premium-select, .premium-textarea { width: 100%; background: #020617; border: 1px solid #1e293b; border-radius: 6px; color: white; padding: 10px; font-size: 0.9rem; }
+        .premium-select, .premium-textarea, .premium-input { width: 100%; background: #020617; border: 1px solid #1e293b; border-radius: 6px; color: white; padding: 10px; font-size: 0.9rem; }
         .premium-textarea { min-height: 80px; resize: vertical; }
-        .premium-select:focus, .premium-textarea:focus { outline: none; border-color: #3b82f6; }
+        .premium-select:focus, .premium-textarea:focus, .premium-input:focus { outline: none; border-color: #3b82f6; }
 
         .reviews-grid-premium { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         .review-box-p { background: rgba(15, 23, 42, 0.3); border-radius: 10px; border: 1px solid #1e293b; padding: 25px; display: flex; flex-direction: column; justify-content: space-between; }
@@ -173,112 +149,13 @@
     <!-- MATRIX EFFECTS CANVAS -->
     <canvas id="imusama-canvas-matrix"></canvas>
 
-    <!-- ==========================================================================
-       ISOLATED GATEWAY ACCESS MANAGEMENT (AUTHENTICATION SCREEN CONTAINER)
-       ========================================================================== -->
-    <div id="application-gateway-view" class="auth-portal-wrapper">
-        <div class="auth-logo">
-            <i class="fa-solid fa-shield-halved"></i> G2G MARKETPLACE
-        </div>
-
-        <!-- URL EXPLICIT ERROR ELEMENT BANNER -->
-        <div id="url-error-banner">Error: Paste your Firebase URL inside index.html on line 273!</div>
-
-        <div class="auth-box">
-            <!-- REGISTER SUITE -->
-            <div id="signup-form-container">
-                <h2>Sign Up</h2>
-                <p class="subtitle">Create your account to get started</p>
-                <form id="signup-form" onsubmit="handleSignUp(event)">
-                    <div class="form-group">
-                        <label>Username</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-user"></i>
-                            <input type="text" id="signup-username" placeholder="Choose a username" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-envelope"></i>
-                            <input type="email" id="signup-email" placeholder="Enter your email" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-lock"></i>
-                            <input type="password" id="signup-password" placeholder="Create a password" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Confirm Password</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-lock"></i>
-                            <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Discord Username (Optional)</label>
-                        <div class="input-wrapper">
-                            <i class="fa-brands fa-discord"></i>
-                            <input type="text" id="signup-discord" placeholder="Enter your Discord username">
-                        </div>
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="terms" required>
-                        <label for="terms" style="margin:0; font-size:0.85rem; color:#94a3b8; text-transform:none;">I agree to the <a href="#">Terms of Service</a></label>
-                    </div>
-                    <button type="submit" class="btn-submit">
-                        <i class="fa-solid fa-user-plus"></i> Sign Up <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </form>
-                <div class="auth-footer">
-                    Already have an account? <button onclick="toggleGatewayForm(false)">Log in</button>
-                </div>
-            </div>
-
-            <!-- SECURE LOG IN SUITE -->
-            <div id="login-form-container" style="display: none;">
-                <h2>Log In</h2>
-                <p class="subtitle">Welcome back! Access your account</p>
-                <form id="login-form" onsubmit="handleLogIn(event)">
-                    <div class="form-group">
-                        <label>Username</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-user"></i>
-                            <input type="text" id="login-username" placeholder="Enter your username" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-lock"></i>
-                            <input type="password" id="login-password" placeholder="Enter your password" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-submit">
-                        <i class="fa-solid fa-right-to-bracket"></i> Log In <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </form>
-                <div class="auth-footer">
-                    Don't have an account? <button onclick="toggleGatewayForm(true)">Sign up</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="badge-footer">
-            <span><i class="fa-solid fa-circle-check"></i> Secure</span> • 
-            <span><i class="fa-solid fa-circle-check"></i> Trusted</span> • 
-            <span><i class="fa-solid fa-circle-check"></i> Professional</span>
-        </div>
-    </div>
-
+    <!-- URL EXPLICIT ERROR ELEMENT BANNER -->
+    <div id="url-error-banner">Error: Paste your Firebase URL inside index.html on line 239!</div>
 
     <!-- ==========================================================================
-       PRIMARY PLATFORM FRAMEWORK OPERATIONAL SCREEN (HIDDEN ON ZERO-LOGINS)
+       PRIMARY PLATFORM FRAMEWORK OPERATIONAL SCREEN (OPEN ACCESSIBLE TO ALL)
        ========================================================================== -->
-    <div id="application-dashboard-view" style="display: none; flex-direction: column; min-height: 100vh;">
+    <div id="application-dashboard-view" style="display: flex; flex-direction: column; min-height: 100vh;">
         
         <!-- NAVBAR CONTAINER AREA -->
         <header class="navbar">
@@ -291,11 +168,10 @@
                 <button onclick="switchTab('features')" id="nav-features" class="nav-btn">Features</button>
                 <button onclick="switchTab('team')" id="nav-team" class="nav-btn">Verified Team</button>
                 <button onclick="switchTab('reviews')" id="nav-reviews" class="nav-btn">Reviews</button>
-                <button onclick="switchTab('profile')" id="nav-profile" class="nav-btn"><i class="fa-solid fa-circle-user"></i> Profile</button>
+                <button onclick="switchTab('profile')" id="nav-profile" class="nav-btn"><i class="fa-solid fa-users"></i> Users Directory</button>
             </nav>
             <div class="nav-auth-buttons">
-                <span id="nav-username-display" class="user-pill"><i class="fa-solid fa-user-tag"></i> Loading...</span>
-                <button onclick="logoutUser()" class="btn btn-outline" style="cursor:pointer;"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</button>
+                <span id="nav-username-display" class="user-pill"><i class="fa-solid fa-user"></i> Guest Mode</span>
             </div>
         </header>
 
@@ -422,7 +298,11 @@
                     <div class="review-submission-box">
                         <h3>Submit Your Public Record Review</h3>
                         <form id="public-review-form" onsubmit="submitLiveReview(event)">
-                            <div class="review-form-row">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div class="sub-group">
+                                    <label>Choose a Unique Nickname</label>
+                                    <input type="text" id="review-username-input" class="premium-input" placeholder="Enter your name..." required>
+                                </div>
                                 <div class="sub-group">
                                     <label>Star Rating</label>
                                     <select id="review-stars-select" class="premium-select">
@@ -434,11 +314,23 @@
                                     </select>
                                 </div>
                             </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                                <div class="sub-group">
+                                    <label>Gmail Address</label>
+                                    <input type="email" id="review-email-input" class="premium-input" placeholder="name@gmail.com" required>
+                                </div>
+                                <div class="sub-group">
+                                    <label>Discord Username</label>
+                                    <input type="text" id="review-discord-input" class="premium-input" placeholder="username#0000" required>
+                                </div>
+                            </div>
+
                             <div class="sub-group" style="margin-top: 15px;">
                                 <label>Your Review Statement</label>
                                 <textarea id="review-text-input" class="premium-textarea" placeholder="Type out your transaction feedback here... Everyone on the web will see this review instantly." required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-discord" style="margin-top: 15px; cursor:pointer;"><i class="fa-solid fa-paper-plane"></i> Publish Review To Public Grid</button>
+                            <button type="submit" class="btn btn-discord" style="margin-top: 15px; cursor:pointer;"><i class="fa-solid fa-paper-plane"></i> Claim Name & Publish Review</button>
                         </form>
                     </div>
 
@@ -448,27 +340,10 @@
                 </div>
             </div>
 
-            <!-- ================= PROFILE & MEMBERS DIRECTORY SLIDE ================= -->
+            <!-- ================= MEMBERS DIRECTORY SLIDE ================= -->
             <div id="slide-profile" class="page-slide">
                 <div class="slide-card-presentation">
-                    <div class="presentation-header">
-                        <h2><i class="fa-solid fa-id-card text-blue"></i> Your Secure Account Profile</h2>
-                        <span class="page-badge">User Matrix Terminal</span>
-                    </div>
-                    <hr class="divider">
-                    <div class="profile-card-layout">
-                        <div class="profile-avatar-big">
-                            <i class="fa-solid fa-user-gear"></i>
-                        </div>
-                        <div class="profile-details-list">
-                            <div class="p-row"><strong>Username Access ID:</strong> <span id="profile-username-val" class="highlight">Unverified</span></div>
-                            <div class="p-row"><strong>Registered Email Hash:</strong> <span id="profile-email-val">Unverified</span></div>
-                            <div class="p-row"><strong>Associated Discord Handle:</strong> <span id="profile-discord-val">None Provided</span></div>
-                            <div class="p-row"><strong>Account Security Status:</strong> <span class="sec-status-pill"><i class="fa-solid fa-shield-check"></i> Activated & Guarded</span></div>
-                        </div>
-                    </div>
-
-                    <div class="members-directory-section" style="margin-top: 40px;">
+                    <div class="members-directory-section">
                         <div class="presentation-header">
                             <h2><i class="fa-solid fa-users text-blue"></i> Registered Marketplace Members</h2>
                             <span class="page-badge">Live Member Registry</span>
@@ -499,12 +374,12 @@
         // PASTE YOUR FIREBASE URL IN THE STRING VARIABLE BELOW 👇
         const firebaseDatabaseURL = "https://g2g1-31e7d-default-rtdb.firebaseio.com";
         
-        let currentUser = localStorage.getItem("activeSessionUser");
         let matrixIntervalId = null;
 
         window.addEventListener("DOMContentLoaded", () => {
             checkFirebaseConfiguration();
-            evaluateSessionStatus();
+            loadReviewsFromStorage();
+            loadMembersRegistry();
         });
 
         function checkFirebaseConfiguration() {
@@ -518,116 +393,6 @@
 
         function isConfigInvalid() {
             return (!firebaseDatabaseURL || firebaseDatabaseURL.includes("YOUR_FIREBASE_URL") || firebaseDatabaseURL.trim() === "");
-        }
-
-        function evaluateSessionStatus() {
-            if (isConfigInvalid()) return;
-            currentUser = localStorage.getItem("activeSessionUser");
-            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-            if (isLoggedIn && currentUser) {
-                document.getElementById("application-gateway-view").style.display = "none";
-                document.getElementById("application-dashboard-view").style.display = "flex";
-                
-                document.getElementById("nav-username-display").innerHTML = `<i class="fa-solid fa-user-astronaut"></i> ${currentUser}`;
-                document.getElementById("profile-username-val").innerText = currentUser;
-                
-                fetch(`${firebaseDatabaseURL}/users/${currentUser}.json`)
-                    .then(res => res.json())
-                    .then(userData => {
-                        if(userData) {
-                            document.getElementById("profile-email-val").innerText = userData.email || "No Email Provided";
-                            document.getElementById("profile-discord-val").innerText = userData.discord || "No Discord Provided";
-                        }
-                    }).catch(err => console.error("Identity collection error:", err));
-
-                loadReviewsFromStorage();
-                
-                if(currentUser.toLowerCase() === "imusama") {
-                    startImusamaMatrixEffect();
-                } else {
-                    stopImusamaMatrixEffect();
-                }
-            } else {
-                document.getElementById("application-gateway-view").style.display = "flex";
-                document.getElementById("application-dashboard-view").style.display = "none";
-                stopImusamaMatrixEffect();
-            }
-        }
-
-        function toggleGatewayForm(showSignUp) {
-            document.getElementById("signup-form-container").style.display = showSignUp ? "block" : "none";
-            document.getElementById("login-form-container").style.display = showSignUp ? "none" : "block";
-        }
-
-        function handleSignUp(e) {
-            e.preventDefault();
-            if (isConfigInvalid()) { alert("Please configure your Firebase URL first!"); return; }
-
-            const user = document.getElementById("signup-username").value.trim();
-            const email = document.getElementById("signup-email").value.trim();
-            const pass = document.getElementById("signup-password").value;
-            const confirmPass = document.getElementById("signup-confirm").value;
-            const discordHandle = document.getElementById("signup-discord").value.trim();
-
-            if (pass !== confirmPass) {
-                alert("Passwords do not match!");
-                return;
-            }
-
-            fetch(`${firebaseDatabaseURL}/users/${user}.json`)
-                .then(res => res.json())
-                .then(existingUser => {
-                    if (existingUser && typeof existingUser === 'object' && existingUser.password) {
-                        alert("Registration Blocked: Username is already taken.");
-                        return null;
-                    }
-
-                    const userProfilePacket = {
-                        username: user,
-                        email: email,
-                        discord: discordHandle || "Not Linked",
-                        password: pass
-                    };
-
-                    return fetch(`${firebaseDatabaseURL}/users/${user}.json`, {
-                        method: "PUT",
-                        body: JSON.stringify(userProfilePacket),
-                        headers: { "Content-Type": "application/json" }
-                    });
-                })
-                .then(response => {
-                    if (!response) return;
-                    alert("Account created successfully! You can now access your profile from any device.");
-                    toggleGatewayForm(false);
-                    document.getElementById("login-username").value = user;
-                })
-                .catch(err => alert("Cloud registration failure: " + err));
-        }
-
-        function handleLogIn(e) {
-            e.preventDefault();
-            if (isConfigInvalid()) { alert("Please configure your Firebase URL first!"); return; }
-
-            const user = document.getElementById("login-username").value.trim();
-            const pass = document.getElementById("login-password").value;
-
-            fetch(`${firebaseDatabaseURL}/users/${user}.json`)
-                .then(res => res.json())
-                .then(globalUserData => {
-                    // Safe verification fallback processing logic
-                    if (globalUserData && typeof globalUserData === 'object') {
-                        if (globalUserData.password === pass || (globalUserData[user] && globalUserData[user].password === pass)) {
-                            localStorage.setItem("isLoggedIn", "true");
-                            localStorage.setItem("activeSessionUser", user);
-                            alert("Handshake complete. Access granted!");
-                            evaluateSessionStatus();
-                            return;
-                        }
-                    }
-                    alert("Invalid username or password!");
-                })
-                .catch(err => alert("Database system connection timeout: " + err));
         }
 
         function switchTab(targetSlide) {
@@ -663,16 +428,13 @@
                     Object.keys(users).forEach(username => {
                         let uData = users[username];
                         if (uData && typeof uData === 'object') {
-                            // Extract internal layout properties correctly
-                            let finalEmail = uData.email || (uData[username] ? uData[username].email : 'Hidden');
-                            let finalDiscord = uData.discord || (uData[username] ? uData[username].discord : 'None');
+                            let finalEmail = uData.email || 'Hidden';
+                            let finalDiscord = uData.discord || 'None';
                             
-                            let isMeBadge = (username === currentUser) ? `<span class="me-pill">You</span>` : "";
                             cardHTML += `
                                 <div class="member-chip-card">
                                     <div class="m-chip-header">
                                         <span class="m-name"><i class="fa-solid fa-circle-user"></i> ${username}</span>
-                                        ${isMeBadge}
                                     </div>
                                     <div class="m-details">
                                         <p><i class="fa-solid fa-envelope"></i> ${finalEmail}</p>
@@ -702,39 +464,108 @@
                 </div>
             `;
 
-            let globalReviews = JSON.parse(localStorage.getItem("publicReviewsArray")) || [];
-            globalReviews.forEach(rev => {
-                defaultHTML = `
-                    <div class="review-box-p custom-user-review">
-                        <div class="r-top">
-                            <span class="r-user" style="color: #3b82f6;"><i class="fa-solid fa-circle-user text-blue"></i> ${rev.author}</span>
-                            <span class="r-stars">${rev.stars}</span>
-                        </div>
-                        <p>"${rev.text}"</p>
-                        <span class="r-date"><i class="fa-solid fa-circle-nodes"></i> Live Public Contribution</span>
-                    </div>
-                ` + defaultHTML;
-            });
-            reviewContainer.innerHTML = defaultHTML;
+            if (isConfigInvalid()) {
+                reviewContainer.innerHTML = defaultHTML;
+                return;
+            }
+
+            // Pull custom reviews dynamically from Firebase instead of local storage
+            fetch(`${firebaseDatabaseURL}/reviews.json`)
+                .then(res => res.json())
+                .then(reviews => {
+                    if (reviews && typeof reviews === 'object') {
+                        Object.keys(reviews).forEach(id => {
+                            let rev = reviews[id];
+                            defaultHTML = `
+                                <div class="review-box-p custom-user-review">
+                                    <div class="r-top">
+                                        <span class="r-user" style="color: #3b82f6;"><i class="fa-solid fa-circle-user text-blue"></i> ${rev.author}</span>
+                                        <span class="r-stars">${rev.stars}</span>
+                                    </div>
+                                    <p>"${rev.text}"</p>
+                                    <span class="r-date"><i class="fa-solid fa-circle-nodes"></i> Live Public Contribution</span>
+                                </div>
+                            ` + defaultHTML;
+                        });
+                    }
+                    reviewContainer.innerHTML = defaultHTML;
+                })
+                .catch(err => {
+                    console.error("Error loading global updates:", err);
+                    reviewContainer.innerHTML = defaultHTML;
+                });
         }
 
         function submitLiveReview(e) {
             e.preventDefault();
+            if (isConfigInvalid()) { alert("Configure your Firebase URL first!"); return; }
+
+            const chosenName = document.getElementById("review-username-input").value.trim();
             const starsSelection = document.getElementById("review-stars-select").value;
+            const emailValue = document.getElementById("review-email-input").value.trim();
+            const discordValue = document.getElementById("review-discord-input").value.trim();
             const reviewTextContent = document.getElementById("review-text-input").value.trim();
-            if(!reviewTextContent) return;
 
-            let globalReviews = JSON.parse(localStorage.getItem("publicReviewsArray")) || [];
-            const newReviewPacket = {
-                author: currentUser || "AnonymousTrader",
-                stars: starsSelection,
-                text: reviewTextContent
-            };
+            if(!chosenName || !reviewTextContent) return;
 
-            globalReviews.push(newReviewPacket);
-            localStorage.setItem("publicReviewsArray", JSON.stringify(globalReviews));
-            document.getElementById("review-text-input").value = "";
-            loadReviewsFromStorage();
+            // Step 1: Verify the chosen name is unique across existing database profiles
+            fetch(`${firebaseDatabaseURL}/users/${chosenName}.json`)
+                .then(res => res.json())
+                .then(existingUser => {
+                    if (existingUser) {
+                        alert(`The name "${chosenName}" is already taken! Please choose another unique nickname.`);
+                        return;
+                    }
+
+                    // Step 2: Push details into user profile table to hold name ownership
+                    const userProfilePacket = {
+                        username: chosenName,
+                        email: emailValue,
+                        discord: discordValue
+                    };
+
+                    return fetch(`${firebaseDatabaseURL}/users/${chosenName}.json`, {
+                        method: "PUT",
+                        body: JSON.stringify(userProfilePacket),
+                        headers: { "Content-Type": "application/json" }
+                    })
+                    .then(() => {
+                        // Step 3: Push review bundle to the shared ledger
+                        const reviewPacket = {
+                            author: chosenName,
+                            stars: starsSelection,
+                            text: reviewTextContent
+                        };
+
+                        return fetch(`${firebaseDatabaseURL}/reviews.json`, {
+                            method: "POST",
+                            body: JSON.stringify(reviewPacket),
+                            headers: { "Content-Type": "application/json" }
+                        });
+                    })
+                    .then(() => {
+                        alert(`Success! "${chosenName}" has been logged and review published dynamically.`);
+                        
+                        // Dynamic Matrix UI effect for exclusive usernames
+                        if(chosenName.toLowerCase() === "imusama") {
+                            startImusamaMatrixEffect();
+                            document.getElementById("nav-username-display").innerHTML = `<i class="fa-solid fa-user-astronaut"></i> Creator: imusama`;
+                        } else {
+                            document.getElementById("nav-username-display").innerHTML = `<i class="fa-solid fa-user-check"></i> Active: ${chosenName}`;
+                        }
+
+                        // Clear Inputs
+                        document.getElementById("review-username-input").value = "";
+                        document.getElementById("review-email-input").value = "";
+                        document.getElementById("review-discord-input").value = "";
+                        document.getElementById("review-text-input").value = "";
+
+                        // Live refresh lists
+                        loadReviewsFromStorage();
+                        loadMembersRegistry();
+                    });
+                })
+                .catch(err => alert("Cloud matrix delivery update block: " + err));
         }
 
         function startImusamaMatrixEffect() {
@@ -782,22 +613,6 @@
 
             if(matrixIntervalId) clearInterval(matrixIntervalId);
             matrixIntervalId = setInterval(drawMatrix, 30);
-        }
-
-        function stopImusamaMatrixEffect() {
-            if(matrixIntervalId) {
-                clearInterval(matrixIntervalId);
-                matrixIntervalId = null;
-            }
-            const canvas = document.getElementById("imusama-canvas-matrix");
-            if(canvas) canvas.style.display = "none";
-        }
-
-        function logoutUser() {
-            localStorage.removeItem("isLoggedIn");
-            localStorage.removeItem("activeSessionUser");
-            alert("Logging out securely...");
-            evaluateSessionStatus();
         }
     </script>
 </body>
